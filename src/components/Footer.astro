@@ -1,0 +1,25 @@
+---
+import { SITE_TITLE } from '../consts';
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer-inner">
+    <p>© {year} {SITE_TITLE} · 用 ❤️ 和 AI 构建</p>
+    <p class="sub">每天帮你追踪 AI 世界 · 🐱 24h 在线</p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid #e5e7eb;
+    padding: 2rem 0;
+    margin-top: 4rem;
+    text-align: center;
+    color: #888;
+  }
+  .sub {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+  }
+</style>

@@ -1,0 +1,184 @@
+---
+import '../styles/global.css';
+import { SITE_TITLE, SITE_DESCRIPTION, SECTIONS } from '../consts';
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const allPosts = await getCollection('blog');
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 10);
+
+// Group by section
+const postsBySection: Record<string, typeof allPosts> = {};
+for (const post of allPosts) {
+  const section = post.data.section || 'daily';
+  if (!postsBySection[section]) postsBySection[section] = [];
+  postsBySection[section].push(post);
+}
+// Sort each section
+for (const key of Object.keys(postsBySection)) {
+  postsBySection[key].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+}
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>🐱 小艾 AI</h1>
+      <p class="hero-desc">AI 最新进展 · Vibe Coding 实战 · 软件工程入门</p>
+      <p class="hero-sub">一个让你从<strong>好奇</strong>到<strong>能做</strong>的学习站</p>
+    </div>
+  </section>
+
+  <!-- Section Cards -->
+  <section class="sections">
+    {Object.entries(SECTIONS).map(([key, section]) => (
+      <a href={`/${key}`} class="section-card">
+        <span class="section-icon">{section.icon}</span>
+        <h3>{section.title}</h3>
+        <p>{section.description}</p>
+        <span class="post-count">
+          {(postsBySection[key] || []).length} 篇
+        </span>
+      </a>
+    ))}
+  </section>
+
+  <!-- Recent Posts -->
+  <section class="recent">
+    <h2>📡 最新内容</h2>
+    <div class="post-list">
+      {recentPosts.map((post) => (
+        <a href={`/blog/${post.id}`} class="post-card">
+          <span class="post-section">{SECTIONS[post.data.section]?.icon} {SECTIONS[post.data.section]?.title}</span>
+          <h3>{post.data.title}</h3>
+          <p class="post-desc">{post.data.description}</p>
+          <div class="post-meta">
+            <FormattedDate date={post.data.pubDate} />
+            {post.data.tags?.slice(0, 3).map((tag) => (
+              <span class="mini-tag">#{tag}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    background: linear-gradient(135deg, #f8f5ff 0%, #e6f7ff 100%);
+    border-radius: 16px;
+    margin-bottom: 3rem;
+  }
+  .hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, #7c3aed, #0284c7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-desc {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  .hero-sub {
+    color: #888;
+  }
+  .sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-card {
+    display: block;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+  .section-card:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+    transform: translateY(-2px);
+  }
+  .section-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .section-card h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+  }
+  .section-card p {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 0;
+  }
+  .post-count {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #7c3aed;
+  }
+  .recent h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+  }
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .post-card {
+    display: block;
+    padding: 1.25rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+  .post-card:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+  }
+  .post-section {
+    font-size: 0.75rem;
+    color: #7c3aed;
+    font-weight: 600;
+  }
+  .post-card h3 {
+    margin: 0.25rem 0;
+    font-size: 1.15rem;
+  }
+  .post-desc {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: #999;
+  }
+  .mini-tag {
+    color: #7c3aed;
+    background: #f8f5ff;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+  }
+</style>
