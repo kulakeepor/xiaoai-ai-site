@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.astro
+
+# Build output
+dist/
+# OS
+.DS_Store
+.env
+.env.production
+*.swp

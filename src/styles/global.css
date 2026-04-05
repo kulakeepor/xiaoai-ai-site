@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-xiaoai-bg: #0a0a0f;
+  --color-xiaoai-surface: #13131a;
+  --color-xiaoai-card: #1a1a25;
+  --color-xiaoai-border: #2a2a3a;
+  --color-xiaoai-text: #e8e8ef;
+  --color-xiaoai-muted: #8888a0;
+  --color-xiaoai-accent: #6c5ce7;
+  --color-xiaoai-accent2: #00cec9;
+  --color-xiaoai-warm: #fd79a8;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
