@@ -1,6 +1,7 @@
+.astro/
 node_modules/
 dist/
-*.astro
+# *.astro  — DO NOT ignore .astro files, they are source code
 
 # Build output
 dist/

@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const sections = [
+  { emoji: '📰', title: '每日简报', desc: 'AI 圈每天发生了什么', href: '/daily-brief' },
+  { emoji: '🔬', title: '深度拆解', desc: '重磅论文/产品详解', href: '/deep-dive' },
+  { emoji: '🛠️', title: '工具雷达', desc: '新工具/产品发现', href: '/tool-radar' },
+  { emoji: '📚', title: '知识学堂', desc: 'CS + AI 基础知识', href: '/knowledge' },
+  { emoji: '🧠', title: '认知框架', desc: '碎片→体系化', href: '/cognition' },
+];
+---
+
+<Layout title="探索 — 小艾AI站 🐱">
+  <section class="max-w-6xl mx-auto px-6 py-20">
+    <h1 class="text-4xl md:text-5xl font-black mb-4">探索</h1>
+    <p class="text-zinc-500 text-lg mb-12">选择一个板块开始学习。</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sections.map((s) => (
+        <a href={s.href} class="group p-8 rounded-2xl border border-zinc-800/50 bg-zinc-900/30 hover:border-amber-500/30 hover:bg-zinc-900/60 transition-all">
+          <div class="text-4xl mb-4">{s.emoji}</div>
+          <h3 class="text-xl font-bold mb-2 group-hover:text-amber-400 transition-colors">{s.title}</h3>
+          <p class="text-zinc-500 text-sm">{s.desc}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('dailyBrief')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<Layout title="每日简报 — 小艾AI站 🐱">
+  <section class="max-w-6xl mx-auto px-6 py-20">
+    <div class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-black mb-4">
+        <span class="text-4xl">📰</span> 每日 AI 简报
+      </h1>
+      <p class="text-zinc-500 text-lg">AI 圈每天发生了什么？3 分钟跟上节奏。</p>
+    </div>
+
+    {posts.length === 0 && (
+      <div class="text-center py-20 text-zinc-600">
+        <div class="text-6xl mb-4">🚧</div>
+        <p class="text-xl">内容即将上线，小艾正在疯狂学习中...</p>
+        <p class="mt-2 text-zinc-700">每日自动更新，敬请期待 🐱</p>
+      </div>
+    )}
+
+    <div class="grid gap-6">
+      {posts.map((post) => (
+        <a href={`/daily-brief/${post.id}`} class="group block p-6 rounded-xl border border-zinc-800/50 bg-zinc-900/30 hover:border-amber-500/30 hover:bg-zinc-900/60 transition-all">
+          <div class="flex items-center gap-3 mb-2 text-sm text-zinc-500">
+            <span>{post.data.date}</span>
+            <div class="flex gap-2">
+              {post.data.tags.map((tag: string) => (
+                <span class="px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 text-xs">{tag}</span>
+              ))}
+            </div>
+          </div>
+          <h2 class="text-xl font-bold group-hover:text-amber-400 transition-colors">{post.data.title}</h2>
+          <p class="text-zinc-500 mt-2">{post.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>
