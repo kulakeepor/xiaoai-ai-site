@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { fetchRecords, TABLES, getText, getUrl, getTags } from '../../lib/feishu';
+
+const records = await fetchRecords(TABLES.knowledge);
+---
+
+<Layout title="知识学堂 — 小艾AI站 🐱">
+  <section class="max-w-6xl mx-auto px-6 py-20">
+    <div class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-black mb-4">
+        <span class="text-4xl">📚</span> 知识学堂
+      </h1>
+      <p class="text-zinc-500 text-lg">软件工程 + CS 基础 + AI 原理。为 vibecoding 服务的硬核知识，但讲人话。</p>
+    </div>
+
+    {records.length === 0 && (
+      <div class="text-center py-20 text-zinc-600">
+        <div class="text-6xl mb-4">📖</div>
+        <p class="text-xl">知识库建设中...</p>
+      </div>
+    )}
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {records.map((rec) => {
+        const f = rec.fields;
+        const title = getText(f['标题']);
+        const topic = getText(f['知识主题']);
+        const category = getText(f['知识类别']);
+        const difficulty = getText(f['难度']);
+        const status = getText(f['学习状态']);
+        const content = getText(f['核心内容']);
+        const notes = getText(f['学习笔记']);
+        const audience = getText(f['适合人群']);
+        const link = getUrl(f['链接']);
+
+        return (
+          <div class="group block p-6 rounded-xl border border-zinc-800/50 bg-zinc-900/30 hover:border-amber-500/30 hover:bg-zinc-900/60 transition-all">
+            <div class="flex flex-wrap items-center gap-3 mb-3 text-sm text-zinc-500">
+              {category && <span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 text-xs">{category}</span>}
+              {difficulty && <span class="px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 text-xs">{difficulty}</span>}
+              {status && <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-xs">{status}</span>}
+            </div>
+            <h2 class="text-xl font-bold group-hover:text-amber-400 transition-colors">{title}</h2>
+            {topic && topic !== title && <p class="text-zinc-500 text-sm mt-1">主题：{topic}</p>}
+            {content && <p class="text-zinc-400 mt-2 leading-relaxed">{content}</p>}
+            {notes && (
+              <p class="text-zinc-500 mt-3 text-sm border-l-2 border-amber-500/30 pl-3 whitespace-pre-line">📝 {notes}</p>
+            )}
+            {audience && <p class="text-zinc-600 mt-2 text-xs">适合：{audience}</p>}
+            {link && (
+              <a href={link} target="_blank" class="inline-flex items-center gap-1 mt-3 text-sm text-amber-500/70 hover:text-amber-400">
+                查看资料 ↗
+              </a>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</Layout>

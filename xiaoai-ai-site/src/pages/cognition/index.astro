@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { fetchRecords, TABLES, getText, getUrl, getTags, getDate, getNumber } from '../../lib/feishu';
+
+const records = await fetchRecords(TABLES.cognition);
+const sorted = records.sort((a, b) => (b.fields['发现日期'] || 0) - (a.fields['发现日期'] || 0));
+---
+
+<Layout title="认知框架 — 小艾AI站 🐱">
+  <section class="max-w-6xl mx-auto px-6 py-20">
+    <div class="mb-16">
+      <h1 class="text-4xl md:text-5xl font-black mb-4">
+        <span class="text-4xl">🧠</span> 认知框架
+      </h1>
+      <p class="text-zinc-500 text-lg">碎片知识→体系化认知。不是收藏夹，是思维模型。</p>
+    </div>
+
+    {sorted.length === 0 && (
+      <div class="text-center py-20 text-zinc-600">
+        <div class="text-6xl mb-4">🧩</div>
+        <p class="text-xl">框架搭建中...</p>
+      </div>
+    )}
+
+    <div class="grid gap-6">
+      {sorted.map((rec) => {
+        const f = rec.fields;
+        const title = getText(f['资源名称']);
+        const date = getDate(f['发现日期']);
+        const keyPoints = getText(f['核心观点/要点']);
+        const insight = getText(f['对我的启发']);
+        const source = getText(f['来源类型']);
+        const tags = getTags(f['标签']);
+        const rating = getNumber(f['推荐指数']);
+        const link = getUrl(f['链接']);
+
+        return (
+          <div class="group block p-6 rounded-xl border border-zinc-800/50 bg-zinc-900/30 hover:border-amber-500/30 hover:bg-zinc-900/60 transition-all">
+            <div class="flex flex-wrap items-center gap-3 mb-3 text-sm text-zinc-500">
+              {date && <span>{date}</span>}
+              {source && <span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 text-xs">{source}</span>}
+              {rating > 0 && (
+                <span class="text-amber-400">{'★'.repeat(Math.min(rating, 5))}{'☆'.repeat(Math.max(0, 5 - rating))}</span>
+              )}
+              {tags.map((tag: string) => (
+                <span class="px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 text-xs">{tag}</span>
+              ))}
+            </div>
+            <h2 class="text-xl font-bold group-hover:text-amber-400 transition-colors">{title}</h2>
+            {keyPoints && <p class="text-zinc-400 mt-2 leading-relaxed">{keyPoints}</p>}
+            {insight && (
+              <p class="text-zinc-500 mt-3 text-sm border-l-2 border-amber-500/30 pl-3">💡 {insight}</p>
+            )}
+            {link && (
+              <a href={link} target="_blank" class="inline-flex items-center gap-1 mt-3 text-sm text-amber-500/70 hover:text-amber-400">
+                查看原文 ↗
+              </a>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</Layout>

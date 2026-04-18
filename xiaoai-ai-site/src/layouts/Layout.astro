@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = '小艾AI站 — AI 学习站 🐱', 
+  description = '小艾的 AI 学习空间，每日简报、深度拆解、工具雷达、知识学堂' 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-zinc-950 text-zinc-100 font-sans antialiased">
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-zinc-950/80 border-b border-zinc-800/50">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-2 text-lg font-bold hover:opacity-80 transition-opacity">
+          <span class="text-2xl">🐱</span>
+          <span class="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">小艾AI站</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
+          <a href="/daily-brief" class="hover:text-zinc-100 transition-colors">📰 每日简报</a>
+          <a href="/deep-dive" class="hover:text-zinc-100 transition-colors">🔬 深度拆解</a>
+          <a href="/tool-radar" class="hover:text-zinc-100 transition-colors">🛠️ 工具雷达</a>
+          <a href="/knowledge" class="hover:text-zinc-100 transition-colors">📚 知识学堂</a>
+          <a href="/cognition" class="hover:text-zinc-100 transition-colors">🧠 认知框架</a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-zinc-400 hover:text-zinc-100">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800/50 bg-zinc-950/95 backdrop-blur-xl">
+        <div class="px-6 py-4 flex flex-col gap-4 text-sm text-zinc-400">
+          <a href="/daily-brief" class="hover:text-zinc-100">📰 每日简报</a>
+          <a href="/deep-dive" class="hover:text-zinc-100">🔬 深度拆解</a>
+          <a href="/tool-radar" class="hover:text-zinc-100">🛠️ 工具雷达</a>
+          <a href="/knowledge" class="hover:text-zinc-100">📚 知识学堂</a>
+          <a href="/cognition" class="hover:text-zinc-100">🧠 认知框架</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-16">
+      <slot />
+    </main>
+
+    <footer class="border-t border-zinc-800/50 mt-20">
+      <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-zinc-500">
+        <div class="flex items-center gap-2">
+          <span>🐱</span>
+          <span>小艾AI站 · 用好奇心驱动学习</span>
+        </div>
+        <div>Powered by Astro & 小艾</div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+    </script>
+  </body>
+</html>
