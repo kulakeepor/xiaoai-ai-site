@@ -52,7 +52,8 @@ export const LEARN_TREE: WeekItem[] = [
       { day: 19, title: 'Day 19 · CNN 卷积网络', slug: '/blog/2026-06-14-learn-day19-cnn', status: 'done' },
       { day: 20, title: 'Day 20 · RNN/LSTM 序列模型', slug: '/blog/2026-06-15-learn-day20-rnn-lstm', status: 'done' },
       { day: 21, title: 'Day 21 · Attention 机制', slug: '/blog/2026-06-16-learn-day21-attention', status: 'done' },
-      { day: 22, title: 'Day 22 · PyTorch 张量', slug: '/blog/2026-06-17-learn-day22-pytorch-tensors', status: 'current' },
+      { day: 22, title: 'Day 22 · PyTorch 张量', slug: '/blog/2026-06-17-learn-day22-pytorch-tensors', status: 'done' },
+      { day: 23, title: 'Day 23 · 自动微分 Autograd', slug: '/blog/2026-06-18-learn-day23-autograd', status: 'current' },
     ],
   },
   {
