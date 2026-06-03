@@ -33,8 +33,8 @@ export const LEARN_TREE: WeekItem[] = [
     title: 'Week 2 · 机器学习核心概念',
     days: [
       { day: 8, title: 'Day 8 · 机器学习全景图', slug: '/blog/2026-06-03-learn-day08-ml-overview', status: 'done' },
-      { day: 9, title: 'Day 9 · 线性回归', slug: '/blog/2026-06-04-learn-day09-linear-regression', status: 'current' },
-      { day: 10, title: 'Day 10 · 逻辑回归与分类', slug: '', status: 'pending' },
+      { day: 9, title: 'Day 9 · 线性回归', slug: '/blog/2026-06-04-learn-day09-linear-regression', status: 'done' },
+      { day: 10, title: 'Day 10 · 逻辑回归与分类', slug: '/blog/2026-06-05-learn-day10-logistic-regression', status: 'current' },
       { day: 11, title: 'Day 11 · 决策树与随机森林', slug: '', status: 'pending' },
       { day: 12, title: 'Day 12 · 无监督学习', slug: '', status: 'pending' },
       { day: 13, title: 'Day 13 · 模型评估与调优', slug: '', status: 'pending' },
