@@ -37,8 +37,8 @@ export const LEARN_TREE: WeekItem[] = [
       { day: 10, title: 'Day 10 · 逻辑回归与分类', slug: '/blog/2026-06-05-learn-day10-logistic-regression', status: 'done' },
       { day: 11, title: 'Day 11 · 决策树与随机森林', slug: '/blog/2026-06-06-learn-day11-decision-tree', status: 'done' },
       { day: 12, title: 'Day 12 · 无监督学习', slug: '/blog/2026-06-07-learn-day12-unsupervised-learning', status: 'done' },
-      { day: 13, title: 'Day 13 · 模型评估与调优', slug: '/blog/2026-06-08-learn-day13-model-evaluation', status: 'current' },
-      { day: 14, title: 'Day 14 · 正则化与特征工程', slug: '', status: 'pending' },
+      { day: 13, title: 'Day 13 · 模型评估与调优', slug: '/blog/2026-06-08-learn-day13-model-evaluation', status: 'done' },
+      { day: 14, title: 'Day 14 · 正则化与特征工程', slug: '/blog/2026-06-09-learn-day14-regularization', status: 'current' },
     ],
   },
   {
