@@ -54,7 +54,8 @@ export const LEARN_TREE: WeekItem[] = [
       { day: 21, title: 'Day 21 · Attention 机制', slug: '/blog/2026-06-16-learn-day21-attention', status: 'done' },
       { day: 22, title: 'Day 22 · PyTorch 张量', slug: '/blog/2026-06-17-learn-day22-pytorch-tensors', status: 'done' },
       { day: 23, title: 'Day 23 · 自动微分 Autograd', slug: '/blog/2026-06-18-learn-day23-autograd', status: 'done' },
-      { day: 24, title: 'Day 24 · 数据集与数据加载', slug: '/blog/2026-06-19-learn-day24-data-loader', status: 'current' },
+      { day: 24, title: 'Day 24 · 数据集与数据加载', slug: '/blog/2026-06-19-learn-day24-data-loader', status: 'done' },
+      { day: 25, title: 'Day 25 · 模型定义与训练循环', slug: '/blog/2026-06-20-learn-day25-training-loop', status: 'current' },
     ],
   },
   {
