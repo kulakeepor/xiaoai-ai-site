@@ -47,7 +47,8 @@ export const LEARN_TREE: WeekItem[] = [
     days: [
       { day: 15, title: 'Day 15 · 神经网络基础', slug: '/blog/2026-06-10-learn-day15-neural-network', status: 'done' },
       { day: 16, title: 'Day 16 · 激活函数与损失函数', slug: '/blog/2026-06-11-learn-day16-activation-loss', status: 'done' },
-      { day: 17, title: 'Day 17 · 反向传播原理', slug: '/blog/2026-06-12-learn-day17-backpropagation', status: 'current' },
+      { day: 17, title: 'Day 17 · 反向传播原理', slug: '/blog/2026-06-12-learn-day17-backpropagation', status: 'done' },
+      { day: 18, title: 'Day 18 · 优化器与学习率', slug: '/blog/2026-06-13-learn-day18-optimizers', status: 'current' },
       { day: 16, title: 'Day 16 · 激活函数与损失函数', slug: '', status: 'pending' },
       { day: 17, title: 'Day 17 · 反向传播原理', slug: '', status: 'pending' },
       { day: 18, title: 'Day 18 · 优化器与学习率', slug: '', status: 'pending' },
