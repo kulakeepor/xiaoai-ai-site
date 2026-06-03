@@ -56,7 +56,8 @@ export const LEARN_TREE: WeekItem[] = [
       { day: 23, title: 'Day 23 · 自动微分 Autograd', slug: '/blog/2026-06-18-learn-day23-autograd', status: 'done' },
       { day: 24, title: 'Day 24 · 数据集与数据加载', slug: '/blog/2026-06-19-learn-day24-data-loader', status: 'done' },
       { day: 25, title: 'Day 25 · 模型定义与训练循环', slug: '/blog/2026-06-20-learn-day25-training-loop', status: 'done' },
-      { day: 26, title: 'Day 26 · 迁移学习与 Fine-tuning', slug: '/blog/2026-06-21-learn-day26-transfer-learning', status: 'current' },
+      { day: 26, title: 'Day 26 · 迁移学习与 Fine-tuning', slug: '/blog/2026-06-21-learn-day26-transfer-learning', status: 'done' },
+      { day: 27, title: 'Day 27 · Hugging Face Transformers', slug: '/blog/2026-06-22-learn-day27-huggingface', status: 'current' },
     ],
   },
   {
