@@ -12,54 +12,39 @@ const posts = (await getCollection('blog'))
 ---
 
 <Layout title={`${section.icon} ${section.title} | 小艾 AI`} description={section.description}>
-  <section class="section-header">
-    <span class="icon">{section.icon}</span>
-    <h1>{section.title}</h1>
-    <p>{section.description}</p>
-  </section>
+  <section class="py-20">
+    <div class="mx-auto max-w-5xl px-4">
+      <div class="mb-12">
+        <p class="mb-2 text-sm text-primary">{section.icon}</p>
+        <h1 class="section-marker text-2xl font-bold text-heading md:text-3xl">{section.title}</h1>
+        <p class="mt-2 text-[13px] text-muted">{section.description}</p>
+      </div>
 
-  <div class="post-list">
-    {posts.length === 0 && <p class="empty">还没有内容，即将开始更新 🚀</p>}
-    {posts.map((post) => (
-      <a href={`/blog/${post.id}`} class="post-card">
-        <h3>{post.data.title}</h3>
-        <p class="post-desc">{post.data.description}</p>
-        <div class="post-meta">
-          <FormattedDate date={post.data.pubDate} />
-          {post.data.tags?.slice(0, 3).map((tag) => (
-            <span class="tag">#{tag}</span>
-          ))}
+      {posts.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-4xl mb-4">🚀</p>
+          <p class="text-muted">还没有内容，即将开始更新</p>
         </div>
-      </a>
-    ))}
-  </div>
+      )}
+
+      <div class="space-y-3">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}`} class="card-glow group block rounded-xl border border-border bg-surface p-5 transition-colors hover:border-primary/40">
+            <h3 class="text-[15px] font-semibold text-heading group-hover:text-primary transition-colors">{post.data.title}</h3>
+            <p class="mt-1 text-[13px] text-muted">{post.data.description}</p>
+            <div class="mt-2 flex items-center gap-3 text-[12px] text-muted">
+              <FormattedDate date={post.data.pubDate} />
+              {post.data.tags?.slice(0, 3).map((tag) => (
+                <span class="text-primary/60">#{tag}</span>
+              ))}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 </Layout>
 
 <style>
-  .section-header {
-    text-align: center;
-    padding: 2rem 0 3rem;
-  }
-  .icon { font-size: 3rem; }
-  .section-header h1 { margin: 0.5rem 0 0.25rem; }
-  .section-header p { color: #666; }
-  .post-list { display: flex; flex-direction: column; gap: 1rem; }
-  .post-card {
-    display: block;
-    padding: 1.25rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 10px;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.2s;
-  }
-  .post-card:hover {
-    border-color: #7c3aed;
-    box-shadow: 0 2px 8px rgba(124,58,237,0.08);
-  }
-  .post-card h3 { margin: 0 0 0.25rem; }
-  .post-desc { color: #666; font-size: 0.9rem; margin: 0.25rem 0; }
-  .post-meta { font-size: 0.8rem; color: #999; display: flex; gap: 0.5rem; align-items: center; }
-  .tag { color: #7c3aed; background: #f8f5ff; padding: 1px 6px; border-radius: 3px; font-size: 0.75rem; }
-  .empty { text-align: center; color: #888; padding: 3rem 0; }
+  /* none needed, using tailwind classes */
 </style>

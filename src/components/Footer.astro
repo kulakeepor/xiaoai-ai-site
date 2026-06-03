@@ -1,25 +1,57 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, SECTIONS } from '../consts';
+import FormattedDate from '../components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
+
 const year = new Date().getFullYear();
+
+const allPosts = await getCollection('blog');
+const postsBySection: Record<string, typeof allPosts> = {};
+for (const post of allPosts) {
+  const s = post.data.section || 'daily';
+  if (!postsBySection[s]) postsBySection[s] = [];
+  postsBySection[s].push(post);
+}
 ---
 
-<footer>
-  <div class="footer-inner">
-    <p>© {year} {SITE_TITLE} · 用 ❤️ 和 AI 构建</p>
-    <p class="sub">每天帮你追踪 AI 世界 · 🐱 24h 在线</p>
+<footer class="border-t border-border/60 bg-surface">
+  <div class="mx-auto max-w-5xl px-4 py-14">
+    <div class="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
+      <div>
+        <div class="mb-3 flex items-center gap-2 font-bold text-heading">
+          <span class="text-lg">🐱</span>
+          <span>{SITE_TITLE}</span>
+        </div>
+        <p class="text-[13px] leading-relaxed text-muted">
+          AI 最新进展 · Vibe Coding 实战<br/>
+          每天帮你追踪 AI 世界
+        </p>
+      </div>
+      <div>
+        <h4 class="mb-3 text-[13px] font-semibold text-heading">板块</h4>
+        <ul class="space-y-2 text-[13px]">
+          {Object.entries(SECTIONS).map(([key, s]) => (
+            <li><a class="text-muted transition-colors hover:text-primary" href={`/${key}`}>{s.icon} {s.title}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-3 text-[13px] font-semibold text-heading">关于</h4>
+        <ul class="space-y-2 text-[13px]">
+          <li><a class="text-muted transition-colors hover:text-primary" href="/about">关于小艾</a></li>
+          <li><a class="text-muted transition-colors hover:text-primary" href="/rss.xml">RSS 订阅</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mb-3 text-[13px] font-semibold text-heading">数据</h4>
+        <p class="text-[13px] text-muted">
+          已发布 {allPosts.length} 篇内容<br/>
+          涵盖 {Object.keys(postsBySection).length} 个板块
+        </p>
+      </div>
+    </div>
+    <div class="mt-12 border-t border-border/60 pt-6 text-center text-xs text-muted">
+      © {year} {SITE_TITLE} · 用 AI 和 ❤️ 构建
+    </div>
   </div>
 </footer>
-
-<style>
-  footer {
-    border-top: 1px solid #e5e7eb;
-    padding: 2rem 0;
-    margin-top: 4rem;
-    text-align: center;
-    color: #888;
-  }
-  .sub {
-    font-size: 0.85rem;
-    margin-top: 0.25rem;
-  }
-</style>

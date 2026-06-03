@@ -1,6 +1,9 @@
 ---
-import BlogPost from '../../layouts/BlogPost.astro';
-import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import LearnLayout from '../../layouts/LearnLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE, AUTHOR, SECTIONS } from '../../consts';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -11,9 +14,112 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
+const section = SECTIONS[post.data.section];
+const isLearn = post.data.section === 'learn';
 ---
 
-<BlogPost {...post.data}>
-  <Content />
-</BlogPost>
+{isLearn ? (
+  <LearnLayout
+    title={post.data.title}
+    description={post.data.description}
+    currentSlug={`/blog/${post.id}`}
+  >
+    <!-- Meta -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 text-[13px] text-muted mb-4">
+        <span>{AUTHOR} 🐱</span>
+        <span>·</span>
+        <FormattedDate date={post.data.pubDate} />
+        {post.data.difficulty && (
+          <>
+            <span>·</span>
+            <span class="text-[11px] rounded-full bg-surface-dim px-2 py-0.5">{post.data.difficulty}</span>
+          </>
+        )}
+      </div>
+      {post.data.tags?.length > 0 && (
+        <div class="flex flex-wrap gap-1.5">
+          {post.data.tags.map((tag: string) => (
+            <span class="text-[11px] text-primary/70 bg-primary/5 rounded px-2 py-0.5">#{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <hr class="border-border mb-8" />
+
+    <!-- Content -->
+    <div class="prose">
+      <Content />
+    </div>
+
+    <!-- Bottom nav -->
+    <hr class="border-border mt-12 mb-8" />
+    <div class="flex justify-between text-[13px]">
+      <a href="/learn" class="text-muted hover:text-primary transition-colors">
+        ← 返回学习路径
+      </a>
+      <a href="/" class="text-muted hover:text-primary transition-colors">
+        回到首页 →
+      </a>
+    </div>
+  </LearnLayout>
+) : (
+  <Layout title={`${post.data.title} | ${SITE_TITLE}`} description={post.data.description}>
+    <article class="py-16">
+      <div class="mx-auto max-w-3xl px-4">
+        <!-- Meta -->
+        <div class="mb-8">
+          <a href={`/${post.data.section}`} class="text-[12px] font-medium text-primary rounded-full bg-primary/5 border border-primary/15 px-3 py-1 inline-block mb-4">
+            {section?.icon} {section?.title}
+          </a>
+          <h1 class="text-2xl font-bold text-heading md:text-3xl leading-tight">{post.data.title}</h1>
+          <p class="mt-2 text-[14px] text-muted">{post.data.description}</p>
+          <div class="mt-3 flex items-center gap-3 text-[13px] text-muted">
+            <span>{AUTHOR} 🐱</span>
+            <span>·</span>
+            <FormattedDate date={post.data.pubDate} />
+            {post.data.updatedDate && (
+              <>
+                <span>·</span>
+                <span>更新于 <FormattedDate date={post.data.updatedDate} /></span>
+              </>
+            )}
+            {post.data.difficulty && (
+              <>
+                <span>·</span>
+                <span class="text-[11px] rounded-full bg-surface-dim px-2 py-0.5">{post.data.difficulty}</span>
+              </>
+            )}
+          </div>
+          {post.data.tags?.length > 0 && (
+            <div class="mt-3 flex flex-wrap gap-1.5">
+              {post.data.tags.map((tag: string) => (
+                <span class="text-[11px] text-primary/70 bg-primary/5 rounded px-2 py-0.5">#{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <hr class="border-border mb-8" />
+
+        <!-- Content -->
+        <div class="prose">
+          <Content />
+        </div>
+
+        <!-- Bottom nav -->
+        <hr class="border-border mt-12 mb-8" />
+        <div class="flex justify-between text-[13px]">
+          <a href={`/${post.data.section}`} class="text-muted hover:text-primary transition-colors">
+            ← 返回{section?.title}
+          </a>
+          <a href="/" class="text-muted hover:text-primary transition-colors">
+            回到首页 →
+          </a>
+        </div>
+      </div>
+    </article>
+  </Layout>
+)}

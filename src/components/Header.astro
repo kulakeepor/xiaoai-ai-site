@@ -1,60 +1,17 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION, NAV_LINKS } from '../consts';
-import HeaderLink from './HeaderLink.astro';
+import { SITE_TITLE, NAV_LINKS } from '../consts';
 ---
 
-<header>
-  <div class="header-inner">
-    <a href="/" class="site-title">
-      <span class="logo">🐱</span>
-      <span class="title-text">{SITE_TITLE}</span>
+<header class="sticky top-0 z-50 border-b border-border/60 bg-bg/90 backdrop-blur-lg">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+    <a href="/" class="flex items-center gap-2 font-bold text-heading">
+      <span class="text-xl">🐱</span>
+      <span class="text-[17px] tracking-tight">{SITE_TITLE}</span>
     </a>
-    <nav>
+    <nav class="hidden items-center gap-5 text-[13px] md:flex">
       {NAV_LINKS.map((link) => (
-        <HeaderLink href={link.href}>{link.label}</HeaderLink>
+        <a class="text-muted transition-colors hover:text-heading" href={link.href}>{link.label}</a>
       ))}
     </nav>
   </div>
 </header>
-
-<style>
-  header {
-    border-bottom: 1px solid #e5e7eb;
-    padding: 1rem 0;
-    margin-bottom: 2rem;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .header-inner {
-    max-width: 72rem;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .site-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: #1a1a2e;
-    font-weight: 800;
-    font-size: 1.3rem;
-  }
-  .logo {
-    font-size: 1.6rem;
-  }
-  nav {
-    display: flex;
-    gap: 0.25rem;
-  }
-  @media (max-width: 768px) {
-    nav {
-      display: none;
-    }
-  }
-</style>

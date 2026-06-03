@@ -1,0 +1,164 @@
+---
+import Layout from './Layout.astro';
+import { LEARN_TREE } from '../data/learn-tree';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentSlug: string;
+}
+
+const { title, description, currentSlug } = Astro.props;
+
+// 找到当前 Day 在树中的位置
+const currentDay = LEARN_TREE
+  .flatMap(w => w.days)
+  .find(d => d.slug === currentSlug);
+
+const currentWeek = LEARN_TREE.find(w => w.days.some(d => d.slug === currentSlug));
+---
+
+<Layout title={`${title} | 知识学堂`} description={description}>
+  <div class="min-h-screen flex">
+    
+    <!-- 侧边栏 -->
+    <aside class="w-72 border-r border-border bg-surface shrink-0 overflow-y-auto sticky top-0 h-screen">
+      
+      <!-- Logo / 返回 -->
+      <div class="p-4 border-b border-border">
+        <a href="/learn" class="flex items-center gap-2 text-sm text-muted hover:text-primary transition-colors">
+          <span>←</span>
+          <span>学习路径</span>
+        </a>
+      </div>
+
+      <!-- 学习树 -->
+      <nav class="p-3" id="learn-tree">
+        {LEARN_TREE.map((week) => (
+          <div class="mb-3">
+            <!-- Week 标题 -->
+            <button
+              class="week-toggle w-full flex items-center justify-between px-3 py-2 rounded-lg text-left text-sm font-semibold text-heading bg-surface-dim hover:bg-primary/5 transition-colors"
+              data-week={week.week}
+            >
+              <span class="text-[13px]">{week.title}</span>
+              <span class="week-arrow text-muted text-xs transition-transform">▸</span>
+            </button>
+
+            <!-- Days 列表 -->
+            <div class="week-days mt-1 space-y-0.5" data-week={week.week} id={`week-${week.week}-days`}>
+              {week.days.map((day) => (
+                <a
+                  href={day.slug || '#'}
+                  class:list={[
+                    'day-item flex items-center gap-2 px-3 py-2 rounded-lg text-[13px] transition-colors',
+                    day.slug === currentSlug
+                      ? 'bg-primary/10 text-primary font-medium border border-primary/20'
+                      : day.status === 'locked'
+                      ? 'text-muted/40 cursor-not-allowed'
+                      : 'text-muted hover:bg-surface-dim hover:text-heading'
+                  ]}
+                  aria-current={day.slug === currentSlug ? 'page' : undefined}
+                >
+                  <!-- 状态图标 -->
+                  <span class="day-status text-base leading-none">
+                    {day.status === 'done' ? '✅' : day.status === 'current' ? '🔄' : day.status === 'locked' ? '🔒' : '○'}
+                  </span>
+                  <!-- 标题 -->
+                  <span class="day-title">{day.title}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </nav>
+
+      <!-- 底部进度 -->
+      <div class="p-4 border-t border-border mt-auto sticky bottom-0 bg-surface">
+        <div class="text-[12px] text-muted">
+          <div class="flex justify-between mb-1">
+            <span>学习进度</span>
+            <span id="progress-text">1/30</span>
+          </div>
+          <div class="w-full bg-surface-dim rounded-full h-1.5">
+            <div id="progress-bar" class="bg-primary h-1.5 rounded-full transition-all" style="width: 3%"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 min-w-0">
+      <!-- 面包屑 -->
+      <div class="border-b border-border bg-surface/80 backdrop-blur px-6 py-3 sticky top-0 z-10">
+        <div class="max-w-3xl mx-auto flex items-center gap-2 text-[13px] text-muted">
+          <a href="/learn" class="hover:text-primary">知识学堂</a>
+          <span>›</span>
+          {currentWeek && (
+            <span class="text-heading">{currentWeek.title}</span>
+          )}
+          {currentDay && (
+            <>
+              <span>›</span>
+              <span class="text-primary">{currentDay.title}</span>
+            </>
+          )}
+        </div>
+      </div>
+
+      <!-- 文章内容 -->
+      <article class="py-8 px-6">
+        <div class="max-w-3xl mx-auto">
+          <slot />
+        </div>
+      </article>
+    </main>
+
+  </div>
+</Layout>
+
+<script>
+  // Week 折叠展开
+  document.querySelectorAll('.week-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const week = toggle.getAttribute('data-week');
+      const daysEl = document.getElementById(`week-${week}-days`);
+      const arrow = toggle.querySelector('.week-arrow');
+      if (daysEl && arrow) {
+        const isOpen = daysEl.style.display !== 'none';
+        daysEl.style.display = isOpen ? 'none' : 'block';
+        arrow.style.transform = isOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+      }
+    });
+  });
+
+  // 进度追踪
+  const STORAGE_KEY = 'xiaoi-learn-progress';
+  function getProgress() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } 
+    catch { return {}; }
+  }
+  function saveProgress(key: string, val: boolean) {
+    const p = getProgress(); p[key] = val;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+  }
+  function markDayDone(dayNum: number) {
+    saveProgress(`day${dayNum}`, true);
+    updateProgressUI();
+  }
+  function updateProgressUI() {
+    const p = getProgress();
+    const done = Object.keys(p).filter(k => k.startsWith('day') && p[k]).length;
+    const total = 30;
+    const pct = Math.round((done / total) * 100);
+    const bar = document.getElementById('progress-bar');
+    const text = document.getElementById('progress-text');
+    if (bar) bar.style.width = pct + '%';
+    if (text) text.textContent = `${done}/${total}`;
+  }
+  // 页面加载时更新进度
+  updateProgressUI();
+
+  // 暴露给外部调用的完成打卡函数
+  (window as any).markDayDone = markDayDone;
+</script>
