@@ -38,14 +38,14 @@ export const LEARN_TREE: WeekItem[] = [
       { day: 11, title: 'Day 11 · 决策树与随机森林', slug: '/blog/2026-06-06-learn-day11-decision-tree', status: 'done' },
       { day: 12, title: 'Day 12 · 无监督学习', slug: '/blog/2026-06-07-learn-day12-unsupervised-learning', status: 'done' },
       { day: 13, title: 'Day 13 · 模型评估与调优', slug: '/blog/2026-06-08-learn-day13-model-evaluation', status: 'done' },
-      { day: 14, title: 'Day 14 · 正则化与特征工程', slug: '/blog/2026-06-09-learn-day14-regularization', status: 'current' },
+      { day: 14, title: 'Day 14 · 正则化与特征工程', slug: '/blog/2026-06-09-learn-day14-regularization', status: 'done' },
     ],
   },
   {
     week: 3,
     title: 'Week 3 · 深度学习理论',
     days: [
-      { day: 15, title: 'Day 15 · 神经网络基础', slug: '', status: 'pending' },
+      { day: 15, title: 'Day 15 · 神经网络基础', slug: '/blog/2026-06-10-learn-day15-neural-network', status: 'current' },
       { day: 16, title: 'Day 16 · 激活函数与损失函数', slug: '', status: 'pending' },
       { day: 17, title: 'Day 17 · 反向传播原理', slug: '', status: 'pending' },
       { day: 18, title: 'Day 18 · 优化器与学习率', slug: '', status: 'pending' },
