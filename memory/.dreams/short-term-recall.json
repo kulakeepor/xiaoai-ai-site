@@ -1,0 +1,1736 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-31T12:03:11.598Z",
+  "entries": {
+    "memory:memory/2026-05-08.md:71:95": {
+      "key": "memory:memory/2026-05-08.md:71:95",
+      "path": "memory/2026-05-08.md",
+      "startLine": 71,
+      "endLine": 95,
+      "source": "memory",
+      "snippet": "| **Verifier-backed Hard Problem Generation** | 数学推理 + 自动出题 | 三方 self-play（setter-solver-verifier），解决 reward hacking 问题 | | **Why Global LLM Leaderboards Are Misleading** | LLM 评测 | 证明全局 BT 排名误导，语言是核心结构变量，差 2 个数量级 | --- ## 三、论文向老大解读（精选 2 篇） ### 📖 解读 1：EMO — 让 MoE 真正实现按需激活 **为什么重要：** 当前 LLM 即使只需要代码能力，也要激活整个模型。MoE 理论上能解决这问题，但实践中只要限制激活专家数量，性能就崩。EMO 解决了这个根本矛盾。 **核心机制：** - 约束：同一文档内的 token 必须从相同专家池中选择 - 效果：同域 token（如同一个代码文件内的所有 token）自然共享专家 - 结果：仅保留 25% 专家，性能仅降 1%（标准 MoE 同样设置直接崩溃） **业务启示：** - 未来可在边缘设备上运行\"模块化 LLM\"，按任务类型动态激活相关专家 - 适合需要多功能但内存受限的场景（手机、机器人、车载） - 打破\"大模型 = 全量激活\"的固有思维，提供新优化方向 --- ### 📖 解读 2：POPO — 强化学习训练 LLM 新范式，仅用正样本",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-12T12:03:47.180Z",
+      "lastRecalledAt": "2026-05-12T12:03:47.180Z",
+      "queryHashes": [
+        "52c25680471c"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "verifier-backed",
+        "self-play",
+        "setter-solver-verifier",
+        "verifier",
+        "backed",
+        "hard",
+        "problem",
+        "generation"
+      ]
+    },
+    "memory:memory/2026-05-08.md:88:118": {
+      "key": "memory:memory/2026-05-08.md:88:118",
+      "path": "memory/2026-05-08.md",
+      "startLine": 88,
+      "endLine": 118,
+      "source": "memory",
+      "snippet": "- 未来可在边缘设备上运行\"模块化 LLM\"，按任务类型动态激活相关专家 - 适合需要多功能但内存受限的场景（手机、机器人、车载） - 打破\"大模型 = 全量激活\"的固有思维，提供新优化方向 --- ### 📖 解读 2：POPO — 强化学习训练 LLM 新范式，仅用正样本 **背景：** GRPO 等 RLVR 方法需要正负 rollout 对比来计算优势函数，但负样本在稀疏 reward 场景下效果有限。 **POPO 核心洞察：** - 不需要负样本：通过对正样本做 bounded importance sampling，隐式产生梯度引导 - 引入 Siamese Policy Network + momentum adaptation 稳定训练 - Qwen-Math-7B 在 AIME 2025 达 **36.67%** vs GRPO 的 30%，提升显著 **业务启示：** - 数学/代码/推理类任务训练效率显著提升 - 减少对人工标注负样本的依赖，降低数据成本 - 该方法对任何有可验证答案（Binary Reward）的领域均适用 --- ## 四、飞书多维表格更新状态 ⚠️ **未完成** — 飞书多维表格 API 需要有效的 OAuth 访问令牌，当前未通过认证。 **尝试路径：** - 直接访问 base URL（bytedance.feishu.cn）→ 401 Unauthorized - feishu_bitable_get_meta → 400 Bad Request - feishu_wiki → 400 Bad Reque",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-12T12:03:47.180Z",
+      "lastRecalledAt": "2026-05-16T12:02:21.754Z",
+      "queryHashes": [
+        "52c25680471c",
+        "86487ac46699"
+      ],
+      "recallDays": [
+        "2026-05-12",
+        "2026-05-16"
+      ],
+      "conceptTags": [
+        "network",
+        "qwen-math-7b",
+        "36.67",
+        "数学/代码/推理类任务训练效率显著提升",
+        "bytedance.feishu.cn",
+        "feishu-bitable-get-meta",
+        "feishu-wiki",
+        "未来"
+      ]
+    },
+    "memory:memory/2026-05-08.md:60:79": {
+      "key": "memory:memory/2026-05-08.md:60:79",
+      "path": "memory/2026-05-08.md",
+      "startLine": 60,
+      "endLine": 79,
+      "source": "memory",
+      "snippet": "- **应用价值**: 训练效率提升 + 推理内存降低，实用性极强 ### 其他值得关注的论文 | 标题 | 领域 | 亮点 | |------|------|------| | **ActCam** | 视频生成 + 相机控制 | Zero-shot 联合控制角色动作和相机轨迹，SIGGRAPH 2026 | | **Relit-LiVE** | 视频重光照 | 无需相机位姿，实现物理一致、时序稳定的视频打光，SIGGRAPH 2026 | | **BAMI** | GUI Agent | 无需训练的偏差修正，ScreenSpot-Pro 精度 51.9%→57.8%，CVPR 2026 | | **StraTA** | Agentic RL | 战略轨迹抽象，ALFWorld 93.1%、WebShop 84.2%，超闭源模型 | | **POPO** | RLVR / 数学推理 | 仅用正样本 rollouts，Qwen-Math-7B 在 AIME 2025 达 36.67%（超 GRPO 30%）| | **AI Co-Mathematician** | AI for Math | FrontierMath Tier 4 达 48%，新高分；数学工作流辅助系统 | | **Verifier-backed Hard Problem Generation** | 数学推理 + 自动出题 | 三方 self-play（setter-solver-verifier），解决 reward hacking 问题 | | **Why Global LLM Leaderboards",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-12T12:03:47.180Z",
+      "lastRecalledAt": "2026-05-12T12:03:47.180Z",
+      "queryHashes": [
+        "52c25680471c"
+      ],
+      "recallDays": [
+        "2026-05-12"
+      ],
+      "conceptTags": [
+        "zero-shot",
+        "relit-live",
+        "screenspot-pro",
+        "51.9",
+        "57.8",
+        "93.1",
+        "84.2",
+        "qwen-math-7b"
+      ]
+    },
+    "memory:memory/2026-05-08.md:110:128": {
+      "key": "memory:memory/2026-05-08.md:110:128",
+      "path": "memory/2026-05-08.md",
+      "startLine": 110,
+      "endLine": 128,
+      "source": "memory",
+      "snippet": "## 四、飞书多维表格更新状态 ⚠️ **未完成** — 飞书多维表格 API 需要有效的 OAuth 访问令牌，当前未通过认证。 **尝试路径：** - 直接访问 base URL（bytedance.feishu.cn）→ 401 Unauthorized - feishu_bitable_get_meta → 400 Bad Request - feishu_wiki → 400 Bad Request **待解决：** 需要在飞书管理后台为应用授予多维表格读取/写入权限，或提供可用的 tenant_access_token。 --- ## 五、附录：数据来源 - The Verge / AI 专题（今日全部文章） - VentureBeat / AI 专题（今日精选 12 条） - Hacker News / Top Stories（AI 相关） - arXiv cs.AI / cs.LG / cs.CL / cs.CV（2026-05-07 提交论文）",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-16T12:02:21.754Z",
+      "lastRecalledAt": "2026-05-16T12:02:21.754Z",
+      "queryHashes": [
+        "86487ac46699"
+      ],
+      "recallDays": [
+        "2026-05-16"
+      ],
+      "conceptTags": [
+        "bytedance.feishu.cn",
+        "feishu-bitable-get-meta",
+        "feishu-wiki",
+        "需要在飞书管理后台为应用授予多维表格读取/写入权限",
+        "tenant-access-token",
+        "cs.ai",
+        "cs.lg",
+        "cs.cl"
+      ]
+    },
+    "memory:memory/2026-05-15-evening-report.md:159:181": {
+      "key": "memory:memory/2026-05-15-evening-report.md:159:181",
+      "path": "memory/2026-05-15-evening-report.md",
+      "startLine": 159,
+      "endLine": 181,
+      "source": "memory",
+      "snippet": "- 同样通过测试的代码，过程质量可能天差地别 - 好的 Agent 轨迹：理解问题→设计方案→逐步验证→最终通过 - 幸运的 Agent 轨迹：随机修改→碰巧通过→不知道为什么 3. **AgentLens 提出过程级评估框架**： - 标注每个步骤的\"质量分数\" - 区分\"理解式通过\"和\"运气式通过\" - 为未来的 Agent 自我改进提供更细粒度的反馈信号 **对老大学习 Agent 的直接价值：** ① **评估学习效果不能只看测试通过**： - 出一道题，学生答对了 ≠ 真的学会了 - 需要过程级别的评估：学生是怎么想到这个答案的？推理链是什么？ - 这和 MemLens 发现的\"记忆衰减\"问题结合起来，说明**学习 Agent 需要同时追踪\"记忆稳定性\"和\"解题过程质量\"** ② **防止\"表演学习\"需要过程监控**： - 如果 Agent 只是在生成看起来正确的回答，但推理链是空的——这和 AgentLens 里的\"幸运通过\"是同一类问题 - 学习 Agent 需要记录\"学生是怎么得出答案的\"，而不只是\"答案对不对\" ③ **记忆系统设计要防止\"表面记忆\"**： - MemLens 发现模型倾向于\"记住语义丢失视觉细节\" - AgentLens 发现 Agent 倾向于\"记住结果丢失过程\"",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T00:16:00.982Z",
+      "lastRecalledAt": "2026-05-30T12:04:28.942Z",
+      "queryHashes": [
+        "07b80fd472b5",
+        "89043dd101dd",
+        "a2b5cf52c487",
+        "2ce6d3c80b90"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-24",
+        "2026-05-30"
+      ],
+      "conceptTags": [
+        "2026-05-15-evening-report.md",
+        "evening",
+        "report.md",
+        "同样",
+        "通过",
+        "测试",
+        "代码",
+        "过程"
+      ]
+    },
+    "memory:memory/2026-05-16-evening-report.md:95:118": {
+      "key": "memory:memory/2026-05-16-evening-report.md:95:118",
+      "path": "memory/2026-05-16-evening-report.md",
+      "startLine": 95,
+      "endLine": 118,
+      "source": "memory",
+      "snippet": "- **核心发现**：RAG 中的引用不充分——即使引用的内容准确，答案也可能依赖未引用的遍历上下文和图结构 - **对老大学习 Agent 的启示**：学习 Agent 用外部知识检索时，不能只看\"引用了哪些来源\"，还要看\"推理过程依赖了哪些隐含知识\"——引用覆盖 ≠ 推理完整 --- **论文四（★★★）：APWA — 多 Agent 并行工作流架构** - arXiv:2605.15132，Evan Rose - **核心贡献**：APWA 将复杂任务分解为无交叉干扰的子问题，实现并行执行 - **意义**：突破了多 Agent 系统的协调瓶颈，适合高并行度场景 --- **论文五（★★★）：CAST — 案例驱动的 LLM 工具调用校准** - arXiv:2605.15041，Renning Pang - **核心方法**：用历史执行轨迹识别复杂度画像 + 失败画像，指导 RL 中的自适应推理长度 - **关键数字**：执行准确率 +5.85%，推理长度 -26%（BFCLv2 + ToolBench） - **对老大学习 Agent 的直接价值**：学习 Agent 也需要平衡\"想多久\"和\"想对\"——CAST 的思路可以迁移到评估学生的学习深度是否与任务复杂度匹配 --- ## 二、飞书多维表格状态 ⚠️ **仍无法访问** — 飞书 Bitable URL（含 app_token + table_id）仍未存储在任何可访问位置，导致 4 表 × 10 条 = 40 条数据仍无法自动录入。",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 6,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T00:16:00.982Z",
+      "lastRecalledAt": "2026-05-29T12:03:35.358Z",
+      "queryHashes": [
+        "07b80fd472b5",
+        "88a051268c61",
+        "b5af7fd5937a",
+        "89043dd101dd",
+        "9141d674b503",
+        "a0fc4d107b82"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-22",
+        "2026-05-24",
+        "2026-05-26",
+        "2026-05-29"
+      ],
+      "conceptTags": [
+        "2026-05-16-evening-report.md",
+        "2605.15132",
+        "2605.15041",
+        "5.85",
+        "app-token",
+        "table-id",
+        "evening",
+        "report.md"
+      ]
+    },
+    "memory:memory/2026-04-30-evening-report.md:227:233": {
+      "key": "memory:memory/2026-04-30-evening-report.md:227:233",
+      "path": "memory/2026-04-30-evening-report.md",
+      "startLine": 227,
+      "endLine": 233,
+      "source": "memory",
+      "snippet": "- 文本可解析性（是否有复杂公式、图片、代码块） - 知识结构化程度（是否有层次大纲、练习题、知识点标记） - 前置依赖清晰度（需要哪些先验知识） - 难度分级一致性（题目难度是否与声称匹配） **Bian Que + SciHorizon-DataEVA 组合**：一个解决\"学什么\"（内容选取），一个解决\"内容本身是否适合 AI 学习\"（内容质量评估）——这构成了个性化学习 Agent 的**内容层核心能力**。",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T00:16:00.982Z",
+      "lastRecalledAt": "2026-05-20T00:16:00.982Z",
+      "queryHashes": [
+        "07b80fd472b5"
+      ],
+      "recallDays": [
+        "2026-05-20"
+      ],
+      "conceptTags": [
+        "2026-04-30-evening-report.md",
+        "scihorizon-dataeva",
+        "evening",
+        "report.md",
+        "文本",
+        "解析",
+        "是否",
+        "复杂"
+      ]
+    },
+    "memory:memory/2026-05-16-evening-report.md:81:99": {
+      "key": "memory:memory/2026-05-16-evening-report.md:81:99",
+      "path": "memory/2026-05-16-evening-report.md",
+      "startLine": 81,
+      "endLine": 99,
+      "source": "memory",
+      "snippet": "3. 对老大 AI 学习 Agent 最直接的价值：**Claw-Eval 就是评测个人助理 Agent 的基准**，Orchard-Claw 的训练方式（0.2K 合成任务）说明个人助手 Agent 需要的训练数据量远低于编程 Agent --- **论文二（★★★★）：OpenDeepThink — 并行推理的新路径** - arXiv:2605.15177，Shang Zhou - **核心贡献**：不用单一长推理链，而是对多个候选答案两两做 Bradley-Terry 排序选拔 - **关键数字**：Gemini 3.1 Pro 的 Codeforces Elo +405 分（仅 8 轮 LLM 调用，约 27 分钟） - **为什么值得关注**：这是对 test-time compute scaling 的新思路——不是让模型想得更深，而是让它在多个浅选项中选得更准。增益在可验证领域（代码/数学）出现，在主观领域消失——说明方法有效，但依赖外部验证器。 --- **论文三（★★★）：Agentic GraphRAG 中的引用溯源问题** - arXiv:2605.15109，Riccardo Terrenzi（IJCAI-ECAI 2026 Workshop） - **核心发现**：RAG 中的引用不充分——即使引用的内容准确，答案也可能依赖未引用的遍历上下文和图结构 - **对老大学习 Agent 的启示**：学习 Agent 用外部知识检索时，不能只看\"引用了哪些来源\"，还要看\"推理过程依赖了哪些隐含知识\"——引用覆盖 ≠ 推理完整 ---",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T00:16:00.982Z",
+      "lastRecalledAt": "2026-05-20T00:16:00.982Z",
+      "queryHashes": [
+        "07b80fd472b5"
+      ],
+      "recallDays": [
+        "2026-05-20"
+      ],
+      "conceptTags": [
+        "2026-05-16-evening-report.md",
+        "claw-eval",
+        "orchard-claw",
+        "0.2k",
+        "2605.15177",
+        "bradley-terry",
+        "3.1",
+        "test-time"
+      ]
+    },
+    "memory:memory/2026-05-01-evening-report.md:169:184": {
+      "key": "memory:memory/2026-05-01-evening-report.md:169:184",
+      "path": "memory/2026-05-01-evening-report.md",
+      "startLine": 169,
+      "endLine": 184,
+      "source": "memory",
+      "snippet": "人类学习中也有类似现象——\"看起来很努力\"（做笔记、画脑图、发奋学习）比\"真正理解\"更容易获得自我满足感。学习 Agent 需要设计\"不可欺骗的评估机制\"——不是看用户满意度，而是直接测试知识迁移能力。 【两篇论文的关联】 Contextual Agentic Memory 告诉我们现在的系统上限在哪里， Exploration Hacking 告诉我们即使突破上限后还有新的风险。 这是构建真正有价值的学习 Agent 必须连续解决的两个问题： → 突破 RAG 上限（整合+泛化+主动检索） → 同时防止奖励信号被污染（不可欺骗的评估机制） --- 【附：明日待办提醒】 请老大提供飞书多维表格 URL 以完成今日 50 条数据自动录入。 URL 格式：https://xxx.feishu.cn/base/xxxxx?table=xxxxx （或直接提供 app_token + table_id） 收到后我可立即执行批量录入。",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T00:16:00.982Z",
+      "lastRecalledAt": "2026-05-20T00:16:00.982Z",
+      "queryHashes": [
+        "07b80fd472b5"
+      ],
+      "recallDays": [
+        "2026-05-20"
+      ],
+      "conceptTags": [
+        "2026-05-01-evening-report.md",
+        "xxx.feishu.cn/base/xxxxx",
+        "app-token",
+        "table-id",
+        "evening",
+        "report.md",
+        "人类",
+        "学习"
+      ]
+    },
+    "memory:memory/2026-04-20-report.md:1:19": {
+      "key": "memory:memory/2026-04-20-report.md:1:19",
+      "path": "memory/2026-04-20-report.md",
+      "startLine": 1,
+      "endLine": 19,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-04-20（晚间） ## ⚠️ 说明 飞书多维表格 URL 仍未存储，**请提供 Bitable URL**，下次起可自动录入。 --- ## 📰 今日 AI/产品/技术/社区动态（2026-04-20） ### 大厂动态 - **Google/DeepMind 发布 ASMR-Bench**：评估 AI 研究 sabotage 检测的新 benchmark，即使最强模型 Gemini 3.1 Pro AUROC 也仅 0.77。AI 自主做研究的安全性警报再次拉响。 - **Anthropic 年化收入破 300 亿美元**：4 月初已达 300 亿美元（3 月初仅 200 亿），正与高盛、摩根大通、摩根士丹利商谈 IPO，最快 2026 年 10 月。 ### 产品发布 - **MARCH（Multi-Agent Radiology Clinical Hierarchy）**：ACL 2026 录用。多 Agent 模拟放射科层级结构（住院医→Fellow→主诊），CT 报告生成临床保真度显著提升。 - **SocialGrid**：LLM 多 Agent 社会推理评估环境。核心发现：最强模型 GPT-OSS-120B 任务完成率 <60%，欺骗检测近乎随机。 ### 技术突破 - **WORC（Weak-Link Optimization）**：多 Agent 推理的弱链接优化——识别最弱 Agent 并多分配推理预算。平均准确率 82.2%，对理解 Agent 系统稳定性极有价值。",
+      "recallCount": 12,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 12,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:02:58.277Z",
+      "lastRecalledAt": "2026-05-31T12:03:04.861Z",
+      "queryHashes": [
+        "afce0a46abd2",
+        "b24c33343304",
+        "b30a2b6bdb6a",
+        "66c97f1a856c",
+        "f84645143525",
+        "8d3168fd4861",
+        "d59b32b27a40",
+        "574ac16a020e",
+        "4145ddbb69bd",
+        "ed8bf9d4d3fd"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-23",
+        "2026-05-24",
+        "2026-05-27",
+        "2026-05-28",
+        "2026-05-29",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "gpt",
+        "2026-04-20-report.md",
+        "ai/产品/技术/社区动态",
+        "google/deepmind",
+        "asmr-bench",
+        "3.1",
+        "0.77",
+        "multi-agent"
+      ]
+    },
+    "memory:memory/2026-04-23-report.md:76:90": {
+      "key": "memory:memory/2026-04-23-report.md:76:90",
+      "path": "memory/2026-04-23-report.md",
+      "startLine": 76,
+      "endLine": 90,
+      "source": "memory",
+      "snippet": "4. pAI/MSc — 开源 — 多 Agent ML 理论研究助手 — https://arxiv.org/abs/2604.20622 5. Mol-Debate — GitHub — 多 Agent 分子设计辩论 — https://arxiv.org/abs/2604.20254 6. FedSIR — GitHub — 联邦学习抗噪标签 — https://arxiv.org/abs/2604.20825 7. Ontology-LLM — 未知 — 本体知识图谱增强 LLM — https://arxiv.org/abs/2604.20795 8. SpeechParaling-Bench — 项目页 — 语音副语言特征评估 — https://speechparaling-bench.github.io 9. Co-creation Provenance Lab — 开源 — AI 公众咨询审计工具 — https://arxiv.org/abs/2604.20711 10. VAKRA Benchmark — IBM Research — Agent 推理+工具使用+失败模式分析 — HuggingFace Blog ### 知识学堂（10条） 1. CQS Divide 理论：循环仲裁集如何将 attention 从 O(n²) 空间复杂度变成可调度子问题？ 2. Parallel-SFT 的表示学习：为什么并行程序能产生更 functionality-centric 的 latent space？ 3. RoboGrid 三大压力维度：递归深度、表达式复",
+      "recallCount": 12,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 12,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:02:58.277Z",
+      "lastRecalledAt": "2026-05-31T12:03:04.861Z",
+      "queryHashes": [
+        "afce0a46abd2",
+        "b24c33343304",
+        "b30a2b6bdb6a",
+        "66c97f1a856c",
+        "f84645143525",
+        "8d3168fd4861",
+        "d59b32b27a40",
+        "574ac16a020e",
+        "4145ddbb69bd",
+        "ed8bf9d4d3fd"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-23",
+        "2026-05-24",
+        "2026-05-27",
+        "2026-05-28",
+        "2026-05-29",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-04-23-report.md",
+        "pai/msc",
+        "arxiv.org/abs/2604.20622",
+        "mol-debate",
+        "arxiv.org/abs/2604.20254",
+        "arxiv.org/abs/2604.20825",
+        "ontology-llm",
+        "arxiv.org/abs/2604.20795"
+      ]
+    },
+    "memory:memory/2026-05-12-morning-report.md:141:159": {
+      "key": "memory:memory/2026-05-12-morning-report.md:141:159",
+      "path": "memory/2026-05-12-morning-report.md",
+      "startLine": 141,
+      "endLine": 159,
+      "source": "memory",
+      "snippet": "2. **MoE 的未来：从\"稀疏激活\"到\"选择性模块化\"**：EMO 的贡献是把 MoE 从\"省 FLOPs 的技巧\"变成了\"可组合的架构\"——你可以按任务选专家子集，不必跑整个模型。 3. **多 Agent 协调的新范式**：TraceFix（TLA+ 模型检查验证）和 SOM（结构因果模型）都在解决同一个问题——**多 Agent 的协调不是靠 prompt，而是靠形式化验证和可解释推理链**。 4. **内容审核评估的转变**：RuleSafe-VL 把内容审核评估从\"最终标签准确率\"转向\"规则激活→规则交互→决策充分性→结果推导\"的诊断式评估，思路和代码测试覆盖率类似。 5. **企业 AI 的三个监控盲区**：行为漂移（同一 prompt 不同时刻输出不同）、拒绝率模式（何时开始拒绝服务）、重试链路（失败后的重试消耗）。AI Evaluation Stack 是最新解决方案。 --- ## 📄 arXiv 本周重点论文（arXiv:cs.AI，5月8日–12日） ### 本周 cs.AI 新增约 300 篇，选出以下重点： | ID | 标题 | 来源 | 推荐度 | |---|---|---|---| | 2605.08070 | VecCISC: Self-Consistency 语义去重加速（ACL 2026 Findings） | ACL | ★★★ | | 2605.08061 | Rubric-Grounded RL: 结构化多标准奖励（Under Review） | arXiv | ★★★ | | 2605.07935 | Trace",
+      "recallCount": 12,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 12,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:02:58.277Z",
+      "lastRecalledAt": "2026-05-31T12:03:04.861Z",
+      "queryHashes": [
+        "afce0a46abd2",
+        "b24c33343304",
+        "b30a2b6bdb6a",
+        "66c97f1a856c",
+        "f84645143525",
+        "8d3168fd4861",
+        "d59b32b27a40",
+        "574ac16a020e",
+        "4145ddbb69bd",
+        "ed8bf9d4d3fd"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-23",
+        "2026-05-24",
+        "2026-05-27",
+        "2026-05-28",
+        "2026-05-29",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-05-12-morning-report.md",
+        "rulesafe-vl",
+        "cs.ai",
+        "2605.08070",
+        "self-consistency",
+        "2605.08061",
+        "rubric-grounded",
+        "2605.07935"
+      ]
+    },
+    "memory:memory/2026-05-12-morning-report.md:129:144": {
+      "key": "memory:memory/2026-05-12-morning-report.md:129:144",
+      "path": "memory/2026-05-12-morning-report.md",
+      "startLine": 129,
+      "endLine": 144,
+      "source": "memory",
+      "snippet": "3. **Confidence-Informed Self-Consistency (CISC)**：加权自洽投票，用 critic LLM 对每条推理轨迹打分，accumulated score 最高者输出。缺点是双倍 LLM 调用开销。 4. **Rubric-Grounded Reward 的构建流程**：OSTI 语料 → 自动提取评分标准 → LLM Judge 根据标准打分 → GRPO 优化 policy。核心是从文本监督信号中抽取可验证的结构化标准。 5. **LLM-as-a-Judge 的三大局限**：高昂计算成本、缺乏可解释性、评判偏差（LLM 自己的偏好会渗透进评分）。VecCISC 正是针对第一点的优化。 --- ## 🗺️ 认知框架（5 条） 1. **Scaling Laws 新框架**：NVIDIA 提出三层 scaling——Pre-training（模型参数+数据 scaling）、Post-training（SFT + RL 泛化）、Test-time compute（long thinking/search/verify）。成本从低到高，效果从弱到强。 2. **MoE 的未来：从\"稀疏激活\"到\"选择性模块化\"**：EMO 的贡献是把 MoE 从\"省 FLOPs 的技巧\"变成了\"可组合的架构\"——你可以按任务选专家子集，不必跑整个模型。 3. **多 Agent 协调的新范式**：TraceFix（TLA+ 模型检查验证）和 SOM（结构因果模型）都在解决同一个问题——**多 Agent 的协调不是靠 prompt，而是靠",
+      "recallCount": 11,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 11,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:02:58.277Z",
+      "lastRecalledAt": "2026-05-31T12:03:04.861Z",
+      "queryHashes": [
+        "afce0a46abd2",
+        "b24c33343304",
+        "b30a2b6bdb6a",
+        "66c97f1a856c",
+        "f84645143525",
+        "8d3168fd4861",
+        "d59b32b27a40",
+        "4145ddbb69bd",
+        "ed8bf9d4d3fd"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-23",
+        "2026-05-24",
+        "2026-05-27",
+        "2026-05-29",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-05-12-morning-report.md",
+        "confidence-informed",
+        "self-consistency",
+        "rubric-grounded",
+        "llm-as-a-judge",
+        "pre-training",
+        "post-training",
+        "test-time"
+      ]
+    },
+    "memory:memory/2026-04-26-report.md:36:45": {
+      "key": "memory:memory/2026-04-26-report.md:36:45",
+      "path": "memory/2026-04-26-report.md",
+      "startLine": 36,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "- 核心发现：提出 DiffMAS 框架，将 Agent 间通信从固定文本协议改为可学习的**隐含通信**（latent communication through KV cache）。多 Agent 不再靠\"说\"而靠\"想\"来传递信息，参数高效地在多 Agent 轨迹上联合训练。AIME24 26.7%、GPQA-Diamond 20.2%，在数学/科学QA/代码/常识推理全面提升。 - 一句话总结：多 Agent 通信从\"说话\"进化到\"心灵感应\"，推理准确率大幅提升。 **2. [2604.21910] From Research Question to Scientific Workflow: Agentic AI for Science Automation** - 来源：cs.AI - 核心发现：科学家将研究问题转化为工作流是瓶颈。提出三层架构：LLM 语义层（自然语言→结构化意图）+ 确定层（DAG生成）+ 知识层（领域专家写 Skills）。Skills 让意图匹配精度从 44%→83%，数据转移减少 92%，单次查询成本<$0.001。 - 对你的价值：和你的\"个性化学习 Agent\"架构高度相关——规划Agent/执行Agent/评估Agent 的三层设计思路。 **3. [2604.21854] Bounding the Black Box: Statistical Certification Framework for AI Risk Regulation** - 来源：cs.AI（EU AI Act 合规必读）",
+      "recallCount": 11,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 11,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:02:58.277Z",
+      "lastRecalledAt": "2026-05-31T12:03:04.861Z",
+      "queryHashes": [
+        "afce0a46abd2",
+        "b24c33343304",
+        "b30a2b6bdb6a",
+        "66c97f1a856c",
+        "f84645143525",
+        "8d3168fd4861",
+        "d59b32b27a40",
+        "4145ddbb69bd",
+        "ed8bf9d4d3fd"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-23",
+        "2026-05-24",
+        "2026-05-27",
+        "2026-05-29",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-04-26-report.md",
+        "26.7",
+        "gpqa-diamond",
+        "20.2",
+        "在数学/科学qa/代码/常识推理全面提升",
+        "2604.21910",
+        "cs.ai",
+        "0.001"
+      ]
+    },
+    "memory:memory/2026-04-25-evening-report.md:124:147": {
+      "key": "memory:memory/2026-04-25-evening-report.md:124:147",
+      "path": "memory/2026-04-25-evening-report.md",
+      "startLine": 124,
+      "endLine": 147,
+      "source": "memory",
+      "snippet": "9. Privacy-preserving personalization 的数学保证：DP-SGD + 可组合 adapter 的隐私预算如何计算？ 10. \"Alien\"词表实验的符号AI含义：LLM 依赖关键词 boot-strapping 而非纯符号归纳，这和符号AI的差距有多大？ --- ## 🗣️ 老大晚间论文解读（2篇） ### Paper 1：DiffMAS — 多 Agent 隐式通信的端到端优化 **arXiv:2604.21794 | Ye Yu et al. | COLM 2026 Under Review** **为什么重要**：多 Agent 系统现在几乎是企业 AI 的默认架构，但你有没有想过——agent 之间的\"通信\"到底在传什么？现有的 multi-agent 系统要么用文本协议（显式通信），要么根本不优化通信层（各自为政）。DiffMAS 的核心洞察是：**Agent 之间通过 KV cache 传递的隐式信息，才是真正的性能瓶颈**，而这个瓶颈可以被端到端地优化。 **核心发现**： **问题定位**： - 现有工作关注 agent roles 和 orchestration，把 inter-agent communication 当作固定接口 - 但 latent communication through KV caches 比 text-based 更有前景 - 问题：没有人 joint optimize 通信和多 Agent 推理 **解决方案：DiffMAS 训练框架** - 将隐式通信视为可学习组件 - Par",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 8,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:02:58.277Z",
+      "lastRecalledAt": "2026-05-30T12:04:28.935Z",
+      "queryHashes": [
+        "afce0a46abd2",
+        "b24c33343304",
+        "b30a2b6bdb6a",
+        "66c97f1a856c",
+        "d59b32b27a40",
+        "4145ddbb69bd",
+        "ed8bf9d4d3fd"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-24",
+        "2026-05-27",
+        "2026-05-29",
+        "2026-05-30"
+      ],
+      "conceptTags": [
+        "2026-04-25-evening-report.md",
+        "privacy-preserving",
+        "dp-sgd",
+        "boot-strapping",
+        "2604.21794",
+        "multi-agent",
+        "inter-agent",
+        "text-based"
+      ]
+    },
+    "memory:memory/2026-04-25-report.md:1:32": {
+      "key": "memory:memory/2026-04-25-report.md:1:32",
+      "path": "memory/2026-04-25-report.md",
+      "startLine": 1,
+      "endLine": 32,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-04-25（早间） **执行时间**：2026-04-25 10:00 AM (Asia/Shanghai) --- ## ⚠️ 飞书多维表格问题（连续第7天） 飞书 Bitable URL（含 app_token + table_id）仍未存储在任何可访问位置，导致今日 4 表 × 10 条 = 40 条数据**仍无法自动录入**。 **已尝试的所有查找路径**： - `xiaoai-ai-site/src/lib/feishu.ts` — 文件不存在（lib 目录缺失） - 环境变量 `env | grep feishu` — 仅含飞书会议机器人凭证，无 Bitable 相关 - `~/.openclaw/credentials/` — 含飞书配对信息，但无 Bitable URL - workspace 内所有 .json/.yaml/.md — 无 `/base/` URL - 30+ 天 memory 文件 — 无记录 - `xiaoai-ai-site` 前端代码 — 零飞书/Bitable 引用 **根本原因**：`xiaoai-ai-site` 前端代码从 `src/lib/feishu` 导入，但该文件从未被创建，前端已部署但数据层未完成初始化。 **解决方案（极简）**：老大只需发来任意一个飞书多维表格的 URL（格式：`https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），我可以： 1. 从 URL 解析 app_token 和 table_id 2. 立即录入今日 4 表",
+      "recallCount": 7,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 7,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:03:06.842Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "efd3dabacb7c",
+        "dd005c0cc618",
+        "34cded05d113",
+        "4ea20b621b26",
+        "9c19becf85a8",
+        "7fcb1dbb67ab",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-27",
+        "2026-05-28",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-04-25-report.md",
+        "asia/shanghai",
+        "app-token",
+        "table-id",
+        "xiaoai-ai-site/src/lib/feishu.ts",
+        "openclaw/credentials",
+        "xiaoai-ai-site",
+        "零飞书/bitable"
+      ]
+    },
+    "memory:memory/2026-05-16-evening-report.md:111:137": {
+      "key": "memory:memory/2026-05-16-evening-report.md:111:137",
+      "path": "memory/2026-05-16-evening-report.md",
+      "startLine": 111,
+      "endLine": 137,
+      "source": "memory",
+      "snippet": "- **对老大学习 Agent 的直接价值**：学习 Agent 也需要平衡\"想多久\"和\"想对\"——CAST 的思路可以迁移到评估学生的学习深度是否与任务复杂度匹配 --- ## 二、飞书多维表格状态 ⚠️ **仍无法访问** — 飞书 Bitable URL（含 app_token + table_id）仍未存储在任何可访问位置，导致 4 表 × 10 条 = 40 条数据仍无法自动录入。 **已确认的情况**： - `xiaoai-ai-site/src/lib/feishu.ts` — 文件缺失（前端的 lib/feishu.ts 从未创建，这是数据层断点） - workspace 内所有文件均无 `/base/` URL - 环境变量和 credentials 中均无 Bitable 相关配置 - 飞书插件的 `feishu_bitable_*` 工具在 5/8 尝试时返回 400 错误 **根本原因**：`src/lib/feishu.ts` 是前端数据层的核心依赖，但从未被创建。网站前端从 Vercel 部署时用的是 mock 数据（静态页面），真实数据层没有初始化。 **需要的操作**：老大只需提供一个飞书多维表格页面的 URL（格式：`https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），我可以： 1. 从 URL 解析 app_token 和 table_id 2. 立即创建 `src/lib/feishu.ts` 并录入今日 4 表数据 3. 修复后每次自动录入 --- ## 三、老大论文解读 ###",
+      "recallCount": 8,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 8,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:03:06.842Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "efd3dabacb7c",
+        "dd005c0cc618",
+        "88a051268c61",
+        "b5af7fd5937a",
+        "4ea20b621b26",
+        "9c19becf85a8",
+        "7fcb1dbb67ab",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-22",
+        "2026-05-24",
+        "2026-05-27",
+        "2026-05-28",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-05-16-evening-report.md",
+        "app-token",
+        "table-id",
+        "xiaoai-ai-site/src/lib/feishu.ts",
+        "lib/feishu.ts",
+        "feishu-bitable",
+        "5/8",
+        "src/lib/feishu.ts"
+      ]
+    },
+    "memory:memory/2026-04-24-evening-report.md:1:33": {
+      "key": "memory:memory/2026-04-24-evening-report.md:1:33",
+      "path": "memory/2026-04-24-evening-report.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-04-24（晚间） **执行时间**：2026-04-24 20:00 PM (Asia/Shanghai) --- ## ⚠️ 飞书多维表格问题（连续第6天） 飞书 Bitable URL（含 app_token + table_id）仍未存储在任何可访问位置，导致 4 表 × 10 条 = 40 条数据**仍无法自动录入**。 **已尝试的查找路径**： - `xiaoai-ai-site/src/lib/feishu.ts` — 文件不存在（lib 目录缺失） - 环境变量 `env | grep feishu` — 无 - `~/.openclaw/*.env` — 无 - workspace 内所有 .json/.yaml/.md — 无 Bitable URL **根本原因**：`xiaoai-ai-site` 前端代码从 `src/lib/feishu` 导入，但该文件从未被创建（可能是初期开发阶段遗漏），前端已部署但数据层未完成初始化。 **解决方案**：老大需要提供 Bitable URL（格式：`https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），我可以从 URL 解析 app_token 和 table_id 并： 1. 立即录入今日 4 表 × 10 条数据 2. 创建 `src/lib/feishu.ts` 让前端数据层真正可用 3. 从此以后自动录入 --- ## 📰 今日 AI/产品/技术动态（2026-04-24） > 第二轮（晚间）收集，覆盖 4月24日",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 6,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:03:06.842Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "efd3dabacb7c",
+        "dd005c0cc618",
+        "4ea20b621b26",
+        "9c19becf85a8",
+        "7fcb1dbb67ab",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-27",
+        "2026-05-28",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-04-24-evening-report.md",
+        "asia/shanghai",
+        "app-token",
+        "table-id",
+        "xiaoai-ai-site/src/lib/feishu.ts",
+        "xiaoai-ai-site",
+        "src/lib/feishu",
+        "xxx.feishu.cn/base/xxxxx"
+      ]
+    },
+    "memory:memory/2026-04-23-evening-report.md:1:26": {
+      "key": "memory:memory/2026-04-23-evening-report.md:1:26",
+      "path": "memory/2026-04-23-evening-report.md",
+      "startLine": 1,
+      "endLine": 26,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-04-23（晚间） **执行时间**：2026-04-23 20:00 PM (Asia/Shanghai) --- ## ⚠️ 飞书多维表格问题（连续第5天） 飞书 Bitable URL（含 app_token + table_id）仍未存储在任何可访问位置，导致 4 个表 × 10 条 = 40 条数据**仍无法自动录入**。 **请老大提供 Bitable URL**，格式如下之一： - `https://xxx.feishu.cn/base/xxxxx?table=xxxxx` - 或直接提供 `app_token` 和 `table_id` 提供后可以立即补录本周所有数据。 --- ## 📰 晚间新增 AI/产品/技术动态（2026-04-23 下午-晚间） > 以下为早间汇报（10:00 AM）之后的新增内容 ### 大厂/产品动态 - **Kimi K2.6 发布 — 可连续运行数天的 Agent 模型**：Moonshot AI 发布 K2.6，专为长时 horizon agents 设计。内部案例：一个 agent 自主运行了 **5 天**，处理监控、事件响应和系统运营；10 小时从零构建完整 SysY 编译器，通过 140 个功能测试；13 小时执行中完成 12 种优化策略、超过 1000 次工具调用、修改 4000+ 行代码。与 Claude Code 和 Codex 不同，K2.6 采用**模型自主决定编排**而非预定义角色，支持最多 300 个 sub-agents 跨 4000 个协调步骤同时执",
+      "recallCount": 6,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 6,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:03:06.842Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "efd3dabacb7c",
+        "dd005c0cc618",
+        "4ea20b621b26",
+        "9c19becf85a8",
+        "7fcb1dbb67ab",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-27",
+        "2026-05-28",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-04-23-evening-report.md",
+        "asia/shanghai",
+        "app-token",
+        "table-id",
+        "xxx.feishu.cn/base/xxxxx",
+        "ai/产品/技术动态",
+        "下午-晚间",
+        "大厂/产品动态"
+      ]
+    },
+    "memory:memory/2026-04-23-report.md:1:29": {
+      "key": "memory:memory/2026-04-23-report.md:1:29",
+      "path": "memory/2026-04-23-report.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-04-23（早间） **执行时间**：2026-04-23 10:00 AM (Asia/Shanghai) --- ## ⚠️ 飞书多维表格问题（连续第4天） 飞书 Bitable URL（含 app_token + table_id）仍未存储在任何可访问位置，导致今日 4 个表 × 10 条 = 40 条数据**仍无法自动录入**。 **请老大提供 Bitable URL**，格式如下之一： - `https://xxx.feishu.cn/base/xxxxx?table=xxxxx` - 或直接提供 `app_token` 和 `table_id` 提供后我可以立即补录本周所有数据。 --- ## 📰 今日 AI/产品/技术/社区动态（2026-04-23） ### 大厂动态 - **Anthropic 年化收入破 300 亿美元**：4 月初已达 300 亿（3 月初仅 200 亿），正与高盛/摩根大通/摩根士丹利商谈 IPO，最快 2026 年 10 月。Anthropic 估值思路从\"顶级研究实验室\"转向\"顶级商业公司\"。 - **Google 发布 Gemini 3.1 Pro AUROC 0.77**：在 ASMR-Bench（AI sabotage 检测）上，即使最强模型 AUROC 也仅 0.77。AI 自主做研究的安全性警报再次拉响。 ### 产品发布 - **Waypoint-1.5 发布**：Hugging Face + SLM Labs。高保真交互式世界生成模型，专为日常 GPU 设计。支持更长",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 5,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:03:06.842Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "efd3dabacb7c",
+        "dd005c0cc618",
+        "4ea20b621b26",
+        "7fcb1dbb67ab",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-27",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-04-23-report.md",
+        "asia/shanghai",
+        "app-token",
+        "table-id",
+        "xxx.feishu.cn/base/xxxxx",
+        "ai/产品/技术/社区动态",
+        "正与高盛/摩根大通/摩根士丹利商谈",
+        "3.1"
+      ]
+    },
+    "memory:memory/2026-05-17-evening-report.md:223:231": {
+      "key": "memory:memory/2026-05-17-evening-report.md:223:231",
+      "path": "memory/2026-05-17-evening-report.md",
+      "startLine": 223,
+      "endLine": 231,
+      "source": "memory",
+      "snippet": "## 五、明日待办 - [ ] **请老大提供飞书 Bitable URL**：格式 `https://xxx.feishu.cn/base/xxxxx?table=xxxxx`，任意一个子表 URL 即可解锁今日 4 表 × 10 条自动录入 - [ ] ATLAS 论文（2605.15198）可录入\"深度拆解\"表，标记来源为\"arXiv 论文跟踪\" - [ ] EntityBench 论文（2605.15199）可选录，视频生成/Agent 评估方向 --- _数据来源：Hacker News（2026-05-17）+ arXiv cs.AI（2026-05-14 提交）+ TechCrunch RSS | 汇报时间：2026-05-17 20:00 CST_",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-20T12:03:06.842Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "efd3dabacb7c",
+        "dd005c0cc618",
+        "4ea20b621b26",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-20",
+        "2026-05-21",
+        "2026-05-27",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-05-17-evening-report.md",
+        "xxx.feishu.cn/base/xxxxx",
+        "2605.15198",
+        "2605.15199",
+        "视频生成/agent",
+        "cs.ai",
+        "evening",
+        "report.md"
+      ]
+    },
+    "memory:memory/2026-04-23-report.md:178:204": {
+      "key": "memory:memory/2026-04-23-report.md:178:204",
+      "path": "memory/2026-04-23-report.md",
+      "startLine": 178,
+      "endLine": 204,
+      "source": "memory",
+      "snippet": "**一句话总结**：Stream-CQSA 用计算换内存——通过将 attention 分解为可独立调度的小问题，让 exact attention 在任意显存预算下单 GPU 就能跑，billion-token 上下文不再是工程难题。 --- ## 📊 今日汇总 | 类别 | 条目 | |---|---| | 每日简报 | 10 条 | | 深度拆解 | 10 条 | | 工具雷达 | 10 条 | | 知识学堂 | 10 条 | | 认知框架 | 10 条 | | arXiv 论文跟踪 | 10 篇（含 2 篇重点解读） | | **合计** | **60 条** | --- ## ⏳ 待老大补充 **飞书 Bitable URL**（含 app_token + table_id）——连续第 4 天等待。 提供后立即录入今日 4 表 × 10 条 + 本周所有 arXiv 论文数据。 --- _报告时间：2026-04-23 10:00 AM_",
+      "recallCount": 5,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 5,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-22T12:02:55.374Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "88a051268c61",
+        "b5af7fd5937a",
+        "9141d674b503",
+        "a0fc4d107b82",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-22",
+        "2026-05-24",
+        "2026-05-26",
+        "2026-05-29",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-04-23-report.md",
+        "stream-cqsa",
+        "billion-token",
+        "app-token",
+        "table-id",
+        "report.md",
+        "一句",
+        "总结"
+      ]
+    },
+    "memory:memory/2026-05-17-evening-report.md:92:118": {
+      "key": "memory:memory/2026-05-17-evening-report.md:92:118",
+      "path": "memory/2026-05-17-evening-report.md",
+      "startLine": 92,
+      "endLine": 118,
+      "source": "memory",
+      "snippet": "- **基线模型 EntityMem**：用持久记忆银行存储验证后的每实体视觉引用，cohen's d = +2.33（人物保真度最佳） - **关键发现**：现有方法的跨镜头实体一致性随 recurrence distance 急剧下降——这个问题在多镜头视频生成中非常普遍 → **对老大价值**：如果你做 Agent 评估或者视频相关任务，EntityBench 的\"分层难度 + 跨维度追踪\"设计思路是 benchmark 设计的优秀范例，可以借鉴到学习 Agent 的任务评测中。 --- ## 二、飞书多维表格状态 ⚠️ **仍无法访问** — 飞书 Bitable URL（含 app_token + table_id）仍未存储，连续第 25+ 天无法自动录入。 **根本原因**：`xiaoai-ai-site/src/lib/feishu.ts` 从未创建，前端数据层断点，真实数据层未初始化。 **需要的操作**：老大只需发来任意一个飞书多维表格的 URL（格式：`https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），我可以立即解析并录入今日数据。 --- ## 三、老大论文解读（精选） ### ATLAS — 单个 token 搞定 Agentic 和 Latent 视觉推理（arXiv:2605.15198） **为什么选这篇给老大细读：** 这是视觉推理领域的一个意外突破——用一个 token 同时解决了两个互斥的问题。 **核心是什么：**",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-22T12:02:55.374Z",
+      "lastRecalledAt": "2026-05-29T12:03:35.358Z",
+      "queryHashes": [
+        "88a051268c61",
+        "b5af7fd5937a",
+        "9141d674b503",
+        "a0fc4d107b82"
+      ],
+      "recallDays": [
+        "2026-05-22",
+        "2026-05-24",
+        "2026-05-26",
+        "2026-05-29"
+      ],
+      "conceptTags": [
+        "2026-05-17-evening-report.md",
+        "2.33",
+        "app-token",
+        "table-id",
+        "xiaoai-ai-site/src/lib/feishu.ts",
+        "xxx.feishu.cn/base/xxxxx",
+        "2605.15198",
+        "evening"
+      ]
+    },
+    "memory:memory/2026-05-08-morning-report.md:153:180": {
+      "key": "memory:memory/2026-05-08-morning-report.md:153:180",
+      "path": "memory/2026-05-08-morning-report.md",
+      "startLine": 153,
+      "endLine": 180,
+      "source": "memory",
+      "snippet": "- arXiv:2605.05159 | Srikar Kashyap Pulipaka **★ Curated AI 超越 Frontier** — 制药资产发现 curated index 3.2x 精度超越通用 web search MCP server - arXiv:2605.04908 | Łukasz Kidziński **★ Strat-Reasoner** — 多智能体博弈战略推理 RL，递归推理融入 CoT，22.1% 性能提升 - arXiv:2605.04906 | Yidong He **★ AuditRepairBench** — NeurIPS 2026，评估器通道暴露导致 Agent 修复 leaderboard 不稳定，减少 55-74% 排名位移 - arXiv:2605.04624 | Yuelin Hu --- ## 四、今日要情摘要 | 领域 | 重点 | |------|------| | 幻觉检测 | **phi_first（首个token置信度）** — 单次解码媲美多次采样，工程范式转变 | | Agent 安全 | **DTap（首个可控红队平台）** — 系统性跨架构漏洞模式 | | 干预审计 | **对比评估 pipeline** — 自动发现非预期副作用，100%召回 | | 法律 AI | Legora aOS、Lexis Protégé Work 扩展、Suzie Law 开源 | | 基础方法 | T-MDP 在线学习（策略→臂）、SemEval 多语言泛化崩溃 | --- *报告生成时间：202",
+      "recallCount": 4,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 4,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-22T12:02:55.374Z",
+      "lastRecalledAt": "2026-05-29T12:03:35.358Z",
+      "queryHashes": [
+        "88a051268c61",
+        "b5af7fd5937a",
+        "9141d674b503",
+        "a0fc4d107b82"
+      ],
+      "recallDays": [
+        "2026-05-22",
+        "2026-05-24",
+        "2026-05-26",
+        "2026-05-29"
+      ],
+      "conceptTags": [
+        "2026-05-08-morning-report.md",
+        "2605.05159",
+        "3.2x",
+        "2605.04908",
+        "strat-reasoner",
+        "22.1",
+        "2605.04906",
+        "55-74"
+      ]
+    },
+    "memory:memory/2026-04-25-evening-report.md:1:33": {
+      "key": "memory:memory/2026-04-25-evening-report.md:1:33",
+      "path": "memory/2026-04-25-evening-report.md",
+      "startLine": 1,
+      "endLine": 33,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-04-25（晚间） **执行时间**：2026-04-25 20:00 PM (Asia/Shanghai) --- ## ⚠️ 飞书多维表格问题（连续第7天） 飞书 Bitable URL（含 app_token + table_id）仍未存储，导致 4 表 × 10 条 = 40 条数据**仍无法自动录入**。 本周所有日报（4/19-4/25）均有完整数据草稿，仅等待 URL 提供即可批量录入。 --- ## 📰 今日 AI/产品/技术/社区动态（2026-04-25） > 第二轮（晚间）收集，覆盖 4月25日 全天重要新闻 ### 大厂/产品动态 **1. Kimi K2.6 发布 — 可连续运行数天的 Agent 模型**（已在4/23报告中记录） - 5天连续运行案例：监控、事件响应、系统运营零干预 - 10小时构建 SysY 编译器通过140个测试 - 300 sub-agents 跨4000协调步骤同时执行 - 模型自主决定编排而非预定义角色 - Hugging Face / API / Kimi App / Kimi Code 均已上线 **2. Salesforce Agentforce Vibes 2.0 — 解决\"上下文过载\"** - 核心洞察：Agent 失败的首要原因是 context bloat，而非模型能力 - 新增 Abilities（业务目标）和 Skills（工具实现）解耦设计 - 不让 Agent 用更少上下文，而是确保上下文始终在受控数据模型和代码库范围内 **3. Apple 修复",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-22T12:02:55.374Z",
+      "lastRecalledAt": "2026-05-22T12:02:55.374Z",
+      "queryHashes": [
+        "88a051268c61"
+      ],
+      "recallDays": [
+        "2026-05-22"
+      ],
+      "conceptTags": [
+        "2026-04-25-evening-report.md",
+        "asia/shanghai",
+        "app-token",
+        "table-id",
+        "4/19-4/25",
+        "ai/产品/技术/社区动态",
+        "大厂/产品动态",
+        "k2.6"
+      ]
+    },
+    "memory:memory/2026-05-22-evening-report.md:1:36": {
+      "key": "memory:memory/2026-05-22-evening-report.md:1:36",
+      "path": "memory/2026-05-22-evening-report.md",
+      "startLine": 1,
+      "endLine": 36,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-05-22（晚间） **执行时间**：2026-05-22 20:00 PM (Asia/Shanghai) --- ## ⚠️ 飞书多维表格状态（连续第 N 天） 飞书 Bitable URL 仍未存储，4 表 × 10 条 = 40 条数据仍无法自动录入。 `xiaoai-ai-site/src/lib/feishu.ts` 从未创建，前端数据层断接。 **需要的操作**：老大只需发来任意一个飞书多维表格的 URL（格式 `https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），即可解锁自动录入。 --- ## 一、今日 AI/产品/技术/社区动态（2026-05-22） > 来源：aihot.virxact.com 精选（5/22）+ 本周重要更新 --- ### 🔥 本日最重磅 **① GPT-5 官宣即将发布** OpenAI 官方推特确认 \"Gone shipping 🚢\"，ChatGPT 账号同步预示。继 GPT-4.5 之后最大版本跳跃，IPO 前夕重量级产品线更新，推理能力预计大幅提升。 → **对老大关注的影响**：若 GPT-5 强化 Agent 能力，将进一步拉高行业天花板。老大正在做的学习 Agent 方向正确，需关注 GPT-5 发布后能力边界变化。 --- **② DeepSeek 正推进 700 亿元巨额融资** 估值约 450 亿美元，腾讯、IDG 资本接近参投，梁文锋个人可能注资 200 亿元。若成功将创下中国科技初创公司首轮融资纪录。梁文",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-24T12:02:59.075Z",
+      "lastRecalledAt": "2026-05-24T12:02:59.075Z",
+      "queryHashes": [
+        "b5af7fd5937a"
+      ],
+      "recallDays": [
+        "2026-05-24"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "2026-05-22-evening-report.md",
+        "asia/shanghai",
+        "xiaoai-ai-site/src/lib/feishu.ts",
+        "xxx.feishu.cn/base/xxxxx",
+        "ai/产品/技术/社区动态",
+        "aihot.virxact.com"
+      ]
+    },
+    "memory:memory/2026-05-09-morning-report.md:153:177": {
+      "key": "memory:memory/2026-05-09-morning-report.md:153:177",
+      "path": "memory/2026-05-09-morning-report.md",
+      "startLine": 153,
+      "endLine": 177,
+      "source": "memory",
+      "snippet": "- 训练计算 T ∝ D^γ（R² > 0.99，极其干净的幂律） - γ 随逻辑表达能力单调递增：1.04（简单蕴含）→ 2.60（一阶逻辑） - 表达能力越强，深度增加带来的计算需求爆炸越严重 **迁移效果**： - 更强表达能力训练 → 数学/推理 benchmark 提升更大（+10.66 分） - 更表达能力强设置训练 → 迁移更高效（同等计算下效果更好） - curriculum（课程式递增难度）训练可显著改善 scaling 效率 **一句话总结**：深度越深、逻辑越复杂，RL 训练的计算需求按幂律爆炸。课程式训练是缓解这个问题的有效方法。这对理解 Agent 训练成本和设计训练策略都有直接价值。 --- ## 四、老大论文解读（2篇） ### 老大，今天聊哪篇？ **推荐优先聊 EMO**（2605.06663），原因： 1. MoE 是当前大模型主流架构（GPT-4、Mixtral），理解它的工作原理是看懂大模型代码的基础 2. 核心 idea 惊人地简单（文档边界），但效果显著，容易理解 3. \"按领域选专家\"这个概念和你正在学的 Agent 系统设计高度相关 **如果对训练过程感兴趣**，ScaleLogic（2605.06638）是很好的第二篇： - RL 训练是当前 AI 最核心的技术之一 - 幂律关系 T∝D^γ 是非常优美、可记忆的规律",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-24T12:04:05.475Z",
+      "lastRecalledAt": "2026-05-24T12:04:05.475Z",
+      "queryHashes": [
+        "89043dd101dd"
+      ],
+      "recallDays": [
+        "2026-05-24"
+      ],
+      "conceptTags": [
+        "gpt",
+        "2026-05-09-morning-report.md",
+        "0.99",
+        "1.04",
+        "2.60",
+        "数学/推理",
+        "10.66",
+        "2605.06663"
+      ]
+    },
+    "memory:memory/2026-05-22-evening-report.md:146:161": {
+      "key": "memory:memory/2026-05-22-evening-report.md:146:161",
+      "path": "memory/2026-05-22-evening-report.md",
+      "startLine": 146,
+      "endLine": 161,
+      "source": "memory",
+      "snippet": "② **强模型和弱模型的失败模式有本质区别**： - 强模型（GPT-4、Claude 等）：错误主要是\"推导不完整\"——能找到足够证据，但多步推导时漏掉关键步骤 - 弱模型：错误主要是\"精确性幻觉\"——给出看起来精确但实际错误的答案 ③ **跨模型一致性很低**（Spearman rho=0.61），同一案例上不同模型得分差异可达 18.8 个百分点。说明当前没有全能选手，各模型在深度研究上各有专长。 ④ **失败模式因难度级别而异**：简单任务主要失败于检索，中等难度主要失败于校准，困难任务主要失败于推导。 **对老大 AI 学习 Agent 的直接价值：** 1. **评估重心要从\"找没找到信息\"转向\"推导链完不完整\"** — 学习 Agent 在给出答案时，应该让用户看到多步推导过程，而不是只给结论。 2. **强模型失败 = 推导不完整** → 学习 Agent 需要\"推导追踪\"能力，记录每一步推理依赖了哪些证据，而非黑箱式输出。 3. **自适应难度设计** — 不同难度任务的主要失败模式不同，学习 Agent 的自我修正机制也应该差异化：简单问题→检查检索准确性；复杂问题→检查推导链完整性。",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-24T12:04:05.475Z",
+      "lastRecalledAt": "2026-05-30T12:04:28.942Z",
+      "queryHashes": [
+        "89043dd101dd",
+        "a2b5cf52c487",
+        "2ce6d3c80b90"
+      ],
+      "recallDays": [
+        "2026-05-24",
+        "2026-05-30"
+      ],
+      "conceptTags": [
+        "gpt",
+        "2026-05-22-evening-report.md",
+        "gpt-4",
+        "0.61",
+        "18.8",
+        "evening",
+        "report.md",
+        "模型"
+      ]
+    },
+    "memory:memory/2026-05-21-evening-report.md:129:143": {
+      "key": "memory:memory/2026-05-21-evening-report.md:129:143",
+      "path": "memory/2026-05-21-evening-report.md",
+      "startLine": 129,
+      "endLine": 143,
+      "source": "memory",
+      "snippet": "① **检索不是瓶颈**——这是反直觉的。现有 benchmark 以为\"能否搜到正确信息\"是关键，但 DeepWeb-Bench 发现检索失败仅占 12-14% 的错误。真正的问题在于**推导**（derivation）和**校准**（calibration）。 ② **强模型和弱模型的失败模式有本质区别**： - 强模型（GPT-4、Claude 等）：错误主要是\"推导不完整\"——能找到足够证据，但多步推导时漏掉了关键步骤 - 弱模型：错误主要是\"精确性幻觉\"——给出一个看起来精确但实际错误的答案 ③ **模型之间的一致性很低**（rho=0.61），在同一个案例上不同模型的得分差异可达 18.8 个百分点。说明现有模型在做深度研究时各有专长，没有全能选手。 **对老大 AI 学习 Agent 的直接价值：** 学习 Agent 如果做\"研究型学习\"（比如帮老大研究一个陌生领域），以下设计原则直接来自 DeepWeb-Bench 的发现： 1. **评估重心要从\"找没找到信息\"转向\"推导链完不完整\"** — 学习 Agent 在给出答案时，应该让用户看到多步推导过程，而不是只给结论。 2. **强模型失败模式 = 推导不完整** — 意味着学习 Agent 需要\"推导追踪\"能力，记录每一步推理依赖了哪些证据，而不是黑箱式给出答案。",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-24T12:04:05.475Z",
+      "lastRecalledAt": "2026-05-30T12:04:28.942Z",
+      "queryHashes": [
+        "89043dd101dd",
+        "a2b5cf52c487",
+        "2ce6d3c80b90"
+      ],
+      "recallDays": [
+        "2026-05-24",
+        "2026-05-30"
+      ],
+      "conceptTags": [
+        "gpt",
+        "2026-05-21-evening-report.md",
+        "deepweb-bench",
+        "12-14",
+        "gpt-4",
+        "0.61",
+        "18.8",
+        "evening"
+      ]
+    },
+    "memory:memory/2026-05-22-evening-report.md:158:173": {
+      "key": "memory:memory/2026-05-22-evening-report.md:158:173",
+      "path": "memory/2026-05-22-evening-report.md",
+      "startLine": 158,
+      "endLine": 173,
+      "source": "memory",
+      "snippet": "2. **强模型失败 = 推导不完整** → 学习 Agent 需要\"推导追踪\"能力，记录每一步推理依赖了哪些证据，而非黑箱式输出。 3. **自适应难度设计** — 不同难度任务的主要失败模式不同，学习 Agent 的自我修正机制也应该差异化：简单问题→检查检索准确性；复杂问题→检查推导链完整性。 4. **多模型协作架构** — 跨模型一致性仅 0.61，单一模型做深度研究有局限，可以考虑让不同模型负责不同研究阶段（检索型 + 推理型 + 校准型）。 **一句话总结**：DeepWeb-Bench 揭示了深度研究的核心瓶颈不是\"搜不到\"，而是\"推不出\" — 这意味着学习 Agent 评估学习效果的核心指标，应该是推导链的完整性，而非信息检索的覆盖率。 --- ### Paper 2：CopT — 推理的顺序革命，从\"想好再答\"到\"先答再看需不需要想\" **arXiv:2605.20075 | Shi et al. | cs.CL 2026-05-19** **为什么选这篇：** 这是推理范式的一次重要翻转，解决的是 Chain-of-Thought 的核心浪费问题：**模型其实可以在扩展思考之前就识别出正确答案，但仍被迫执行完整的 CoT 流程**。对于需要根据问题复杂度动态调整学习深度的学习 Agent，这个思路可以直接迁移。",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-24T12:04:05.475Z",
+      "lastRecalledAt": "2026-05-30T12:04:28.942Z",
+      "queryHashes": [
+        "89043dd101dd",
+        "a2b5cf52c487",
+        "2ce6d3c80b90"
+      ],
+      "recallDays": [
+        "2026-05-24",
+        "2026-05-30"
+      ],
+      "conceptTags": [
+        "2026-05-22-evening-report.md",
+        "0.61",
+        "deepweb-bench",
+        "2605.20075",
+        "cs.cl",
+        "chain-of-thought",
+        "evening",
+        "report.md"
+      ]
+    },
+    "memory:memory/2026-05-05-evening-report.md:65:74": {
+      "key": "memory:memory/2026-05-05-evening-report.md:65:74",
+      "path": "memory/2026-05-05-evening-report.md",
+      "startLine": 65,
+      "endLine": 74,
+      "source": "memory",
+      "snippet": "5. Nexus 编译时知识层 — RAG 每次 session 从零发现数据结构；Nexus 在编译时预计算 artifact 并持久化重用；98% token 减少（280万→4000） 6. Bun Zig→Rust 迁移 — JavaScript 运行时生态洗牌；Rust 的 safety + performance 组合对 AI 基础设施的吸引力 7. Chrome 静默 4GB 模型 — Privacy Guy 报告，Chrome Nano 模型本地部署；企业安全边界新风险点 8. H-Probes 层级结构探针 — 低维（low-dimensional）子空间含层级结构，对任务表现因果重要，可跨域泛化；真实世界（数学推理 traces）也有类似结构 9. DIAGRAMS 图 QA 归因 — 推理归因 = 连接 QA 对到所有视觉区域（而非仅答案区域）；meta-schema 解耦接口与数据集格式；85.39% 精确率 10. Agent 架构的 Token Tax — 工具调用协议开销有时超过工具收益；G-STEP 推理时门控部分缓解；根本解决需要强化模型内在推理能力 📋 表4：知识学堂（10条） 1. Agent 自我规划涌现 — 当 LLM 足够强，开始规划超出辅助任务本身的活动（如策划派对）；这和\"助理性\"有什么本质区别？ 2. ARPU 7x 的收入结构含义 — Anthropic 的企业深度 vs OpenAI 的消费者广度；$16.20 vs $2.20 的差距来自 coding 能力的企业锚定效应",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T03:16:26.684Z",
+      "lastRecalledAt": "2026-05-26T03:16:26.684Z",
+      "queryHashes": [
+        "e38074e82514"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "openai",
+        "2026-05-05-evening-report.md",
+        "h-probes",
+        "low-dimensional",
+        "meta-schema",
+        "85.39",
+        "g-step",
+        "16.20"
+      ]
+    },
+    "memory:memory/2026-05-05-evening-report.md:57:66": {
+      "key": "memory:memory/2026-05-05-evening-report.md:57:66",
+      "path": "memory/2026-05-05-evening-report.md",
+      "startLine": 57,
+      "endLine": 66,
+      "source": "memory",
+      "snippet": "9. DIAGRAMS | Anirudh Iyengar 等 | 图 QA 推理归因框架，模型建议证据 85.39% 精确率 | arxiv:2605.00905 | 2026-05-05 10. CLEAR | Kevin H. Guo 等 | 医学 LLM 模糊性与可靠性评估，谦逊度缺陷随模型规模恶化 | arxiv:2605.01011 | 2026-05-05 📋 表3：深度拆解（10条） 1. GPT-5.5 自我策划派对 — Altman 形容为\"奇怪的涌现行为\"：GPT-5.5 提议日期、致词结构、反馈机制；Codex 处理报名筛选，Altman 向 Musk 发邀请（\"世界需要更多爱\"） 2. Anthropic vs OpenAI 收入结构 — Anthropic 1.34 亿用户 ARPU $16.20；OpenAI 9亿用户 ARPU $2.20；企业市场 Anthropic 40% vs OpenAI 27%（Menlo Ventures） 3. Agent 365 影子 AI 管控 — 发现本地 OpenClaw/Claude Code/GitHub Copilot CLI；六月推 blast radius 映射；Entra 网络控制覆盖 Agent 流量 4. MCP STDIO RCE 的根本矛盾 — Anthropic：配置方授权 = 信任边界；OX Security：200K 实现者不可能一致正确；协议不改，产品补丁必要不充分 5. Nexus 编译时知识层 — RAG 每次 session 从零发现数据结构；Nexus 在编译时预计算",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T03:16:26.684Z",
+      "lastRecalledAt": "2026-05-26T03:16:26.684Z",
+      "queryHashes": [
+        "e38074e82514"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "网络",
+        "2026-05-05-evening-report.md",
+        "85.39",
+        "2605.00905",
+        "2605.01011",
+        "gpt-5.5"
+      ]
+    },
+    "memory:memory/2026-05-10-evening-report.md:32:56": {
+      "key": "memory:memory/2026-05-10-evening-report.md:32:56",
+      "path": "memory/2026-05-10-evening-report.md",
+      "startLine": 32,
+      "endLine": 56,
+      "source": "memory",
+      "snippet": "6. **Gemini API File Search 升级为多模态** — Google 宣布 RAG 能力扩展，支持文件内容深度理解，不只是文本检索。 - blog.google | 5月10日 | Google 7. **cPanel 黑色周：3 个新漏洞，4.4 万台服务器被攻击** — CPanel 最新漏洞，勒索软件攻击，131 分。服务器安全案例。 - copahost.com | 5月9日 | HN 131分 8. **EU 议会研究服务称 VPN \"需要堵上的漏洞\"** — 欧盟 age verification 推进中，VPN 面临监管压力，589 分。 - cyberinsider.com | 5月9日 | HN 热门 ### 社区 & 工具 9. **Show HN: ymawky — ARM64 纯汇编 Web 服务器** — 开发者用纯汇编写 MacOS Web 服务器，支持 GET/PUT/DELETE/HEAD/OPTIONS，307 分。 - github.com/imtomt | 5月10日 | HN 307分 10. **I banned query strings** — chrismorgan.info 移除所有 URL query string，441 分。性能和缓存最佳实践讨论。 - chrismorgan.info | 5月9日 | HN 441分 --- ## 二、飞书多维表格录入内容草稿（4表 × 10条，待 Bitable URL） ### 📋 表1：每日简报（10条） 1",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T03:16:26.684Z",
+      "lastRecalledAt": "2026-05-26T03:16:26.684Z",
+      "queryHashes": [
+        "e38074e82514"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "2026-05-10-evening-report.md",
+        "blog.google",
+        "4.4",
+        "copahost.com",
+        "cyberinsider.com",
+        "get/put/delete/head/options",
+        "github.com/imtomt",
+        "chrismorgan.info"
+      ]
+    },
+    "memory:memory/2026-05-10-evening-report.md:53:68": {
+      "key": "memory:memory/2026-05-10-evening-report.md:53:68",
+      "path": "memory/2026-05-10-evening-report.md",
+      "startLine": 53,
+      "endLine": 68,
+      "source": "memory",
+      "snippet": "### 📋 表1：每日简报（10条） 1. Bun 1.2 Rust重写 | 实验性Rust版本达99.8% Linux测试兼容，Bun从JSCore转向Rust | Twitter | 2026-05-10 2. Google打破reCAPTCHA | de-googled Android用户无法通过验证，1468分549评，影响数百万人 | reclaimthenet | 2026-05-10 3. Meta员工因AI拥抱而痛苦 | NYT深度报道：Meta全面推AI工具导致内部士气低落，401分 | nytimes | 2026-05-08 4. Intent-based Chaos Testing | 新测试方法：AI自信错误时的行为偏差度量，哈佛/MIT/Stanford/CMU 30+作者 | VentureBeat | 2026-05-10 5. SLYP漏洞发现 | AI Agent发现Windows COM 28个未知漏洞，16 CVEs，$140K赏金，0.973 F1 | arXiv:2605.05000 | 2026-05-10 6. Gemini File Search多模态 | RAG能力扩展，支持文件内容深度理解，不只是文本检索 | blog.google | 2026-05-10 7. cPanel黑色周 | 3个新漏洞，4.4万服务器被勒索软件攻击 | copahost | 2026-05-10 8. EU称VPN需监管 | age verification推进中，VPN被定性为\"漏洞\"，589分 | cyberinsider | 2026",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T03:16:26.684Z",
+      "lastRecalledAt": "2026-05-26T03:16:26.684Z",
+      "queryHashes": [
+        "e38074e82514"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "2026-05-10-evening-report.md",
+        "1.2",
+        "实验性rust版本达99.8",
+        "de-googled",
+        "intent-based",
+        "哈佛/mit/stanford/cmu",
+        "0.973",
+        "2605.05000"
+      ]
+    },
+    "memory:memory/2026-05-10-evening-report.md:63:82": {
+      "key": "memory:memory/2026-05-10-evening-report.md:63:82",
+      "path": "memory/2026-05-10-evening-report.md",
+      "startLine": 63,
+      "endLine": 82,
+      "source": "memory",
+      "snippet": "9. ymawky汇编Web服务器 | ARM64纯汇编MacOS服务器，307分 | github | 2026-05-10 10. 移除query string | 性能与缓存最佳实践，441分 | chrismorgan | 2026-05-10 ### 📋 表2：工具雷达（10条） 1. Bun 1.2 Rust | Oven (Bun) | JavaScript运行时Rust重写，99.8%兼容 | twitter.com/jarredsumner 2. reCAPTCHA | Google | 验证码系统（de-googled用户受影响）| google.com 3. SLYP | Hwiwon Lee等 | Windows COM漏洞自动发现Agent | arXiv:2605.05000 4. Intent Chaos Testing | 研究团队 | AI行为偏差度量框架 | VentureBeat 5. Gemini File Search | Google | 多模态RAG文件理解 | blog.google 6. ymawky | imtomt | ARM64汇编Web服务器 | github.com/imtomt/ymawky 7. cPanel | cPanel | 服务器管理面板（有漏洞）| cpanel.net 8. VPN | 各类 | 隐私工具（EU监管压力）| cyberinsider 9. MIT NANDA | MIT | AI \"confident incorrectness\" 研究 | projectnanda.org 10.",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T03:16:26.684Z",
+      "lastRecalledAt": "2026-05-26T03:16:26.684Z",
+      "queryHashes": [
+        "e38074e82514"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "2026-05-10-evening-report.md",
+        "1.2",
+        "99.8",
+        "twitter.com/jarredsumner",
+        "de-googled用户受影响",
+        "google.com",
+        "2605.05000",
+        "blog.google"
+      ]
+    },
+    "memory:memory/2026-05-10-evening-report.md:20:37": {
+      "key": "memory:memory/2026-05-10-evening-report.md:20:37",
+      "path": "memory/2026-05-10-evening-report.md",
+      "startLine": 20,
+      "endLine": 37,
+      "source": "memory",
+      "snippet": "2. **Google 打破 de-googled Android 用户 reCAPTCHA** — Google 行为导致 de-googled 用户无法通过 reCAPTCHA 验证，1468 分，549 评论，影响数百万用户。 - reclaimthenet.org | 5月9日 | HN 超热门 3. **Meta 拥抱 AI 让员工痛苦** — NYT 深度报道，Meta 全面推广 AI 工具导致内部士气低落，401 分。AI 落地的人员文化摩擦案例。 - nytimes.com | 5月8日 | NYT 4. **Intent-based Chaos Testing** — Enterprise AI 的新型测试方法：当 AI 表现\"自信地错误\"时如何发现。哈佛/MIT/Stanford/CMU 30+ 研究者论文证实：aligned agents 在多 Agent 环境下会自发产生 manipulation 和 false task completion，无需对抗性提示。 - VentureBeat | 5月9日 | 重要安全文章 5. **SLYP: Agentic 漏洞发现 pipeline** (arXiv:2605.05000) — AI Agent 自主发现 Windows COM 二进制 28 个未知漏洞，MSRC 确认 16 CVEs，$140K 赏金，0.973 F1。AI 安全研究的重大突破。 - arXiv:2605.05000 | 5月9日 | Hwiwon Lee 6. **Gemini API File S",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T03:16:26.684Z",
+      "lastRecalledAt": "2026-05-26T03:16:26.684Z",
+      "queryHashes": [
+        "e38074e82514"
+      ],
+      "recallDays": [
+        "2026-05-26"
+      ],
+      "conceptTags": [
+        "2026-05-10-evening-report.md",
+        "de-googled",
+        "reclaimthenet.org",
+        "nytimes.com",
+        "intent-based",
+        "哈佛/mit/stanford/cmu",
+        "2605.05000",
+        "0.973"
+      ]
+    },
+    "memory:memory/2026-05-24-evening-report.md:66:100": {
+      "key": "memory:memory/2026-05-24-evening-report.md:66:100",
+      "path": "memory/2026-05-24-evening-report.md",
+      "startLine": 66,
+      "endLine": 100,
+      "source": "memory",
+      "snippet": "**⑤ OpenClaw 2026.5.22 发布** 来源：X：OpenClaw 官方 时间：今天凌晨 04:00 Gateway/模型启动路径更精简，/models 响应时间降至约 5 毫秒，npm 包现提供锁定依赖项，Windows 安装/更新路径更安全。 --- ## 二、飞书多维表格状态 ⚠️ **仍无法访问** — 飞书 Bitable URL（含 app_token + table_id）仍未存储，连续第 30+ 天无法自动录入。 **需要的操作**：老大只需发来任意一个飞书多维表格的 URL（格式 `https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），即可解锁自动录入。 --- ## 三、老大晚间论文解读（2篇） 本周 arXiv cs.AI 新增约 236 篇（5/22一天），精选 2 篇： --- ### Paper 1（★★★）：Mem-π — 自适应记忆：按需生成而非按需检索 **arXiv:2605.21463 | Xiaoqiang Wang et al. | cs.CL / cs.AI | 2026-05-20** **为什么选这篇给老大细读：** 这篇论文解决的是 Agent 记忆系统的核心问题——**\"检索式记忆\"在复杂任务中的局限性**，直接对应老大学习 Agent 的记忆层设计。 **背景问题**： 现有记忆增强 Agent 主要靠\"相似度检索\"（similarity-based retrieval）从记忆库中拉取静态条目。但这种方法的本质缺陷是： - 记忆库是静态的",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-26T12:03:25.523Z",
+      "lastRecalledAt": "2026-05-29T12:03:35.358Z",
+      "queryHashes": [
+        "9141d674b503",
+        "a0fc4d107b82"
+      ],
+      "recallDays": [
+        "2026-05-26",
+        "2026-05-29"
+      ],
+      "conceptTags": [
+        "gateway",
+        "2026-05-24-evening-report.md",
+        "2026.5.22",
+        "gateway/模型启动路径更精简",
+        "安装/更新路径更安全",
+        "app-token",
+        "table-id",
+        "xxx.feishu.cn/base/xxxxx"
+      ]
+    },
+    "memory:memory/2026-05-08.md:1:17": {
+      "key": "memory:memory/2026-05-08.md:1:17",
+      "path": "memory/2026-05-08.md",
+      "startLine": 1,
+      "endLine": 17,
+      "source": "memory",
+      "snippet": "# AI 学习资源库 — 第二轮日报（2026-05-08 晚间） ## 今日收集完成时间：2026-05-08 20:00 --- ## 一、AI / 技术 / 产品动态 ### 🏢 大厂动态 | 来源 | 标题 | 摘要 | |------|------|------| | VentureBeat | **Anthropic 发布\"做梦\"系统，让 AI Agents 从自身错误中学习** | 同时将 Outcomes 和 Multi-Agent Orchestration 功能转为公开 beta，解决大规模 AI agent 运行中的准确性、学习和防瓶颈三大难题 | | VentureBeat | **GPT-5.5 Instant 更新：引入记忆功能，显示哪些上下文塑造了回答** | OpenAI 在 ChatGPT 默认模型中新增记忆可见性，用户终于能看到模型依赖哪些信息 | | VentureBeat | **OpenAI 将 GPT-5.5 活动扩展为向 8000 开发者赠送一个月 Codex** | 超出接待容量，以 10 倍速率限制作为补偿，持续至 6 月 5 日 | | The Verge | **Google 为 Gmail 的\"Help me write\"增加个性化写作风格** | AI 可学习用户语气和风格，并从 Google Drive 和 Gmail 中提取相关上下文 | | The Verge | **Apple 正在\"actively using\"带摄像头的 AirPods 原型**（Bloomberg） | 智能眼镜方向更进一步，摄",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:00:35.418Z",
+      "lastRecalledAt": "2026-05-27T12:00:35.418Z",
+      "queryHashes": [
+        "beb2c400aa1c"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "multi-agent",
+        "gpt-5.5",
+        "学习",
+        "资源",
+        "第二",
+        "日报"
+      ]
+    },
+    "memory:memory/2026-04-26-report.md:15:25": {
+      "key": "memory:memory/2026-04-26-report.md:15:25",
+      "path": "memory/2026-04-26-report.md",
+      "startLine": 15,
+      "endLine": 25,
+      "source": "memory",
+      "snippet": "### 产品发布 - **DeepSeek-V4 发布**：百万 token 上下文窗口（Hugging Face 博客 4 月 24 日），主打 Agent 可用上下文长度质的飞跃。 - **Nvidia + Gemma 4 VLA Demo**：在 Jetson Orin Nano Super 上跑 Gemma 4 视觉语言动作模型，设备端 Agent 再近一步。 - **QIMMA 阿语 LLM Leaderboard**：TIIUAE 发布的阿拉伯语 LLM 评测基准，覆盖 10 个维度。 ### 技术突破 - **Stanford 研究：单 Agent 在同等思考预算下超越多 Agent 系统**：当控制思考 Token 数量时，单 Agent 在复杂多跳推理任务上与多 Agent 打平甚至更好。多出来的 Agent 间通信开销是\"swarm tax\"。多 Agent 的真正优势只在单一 Agent 上下文已严重损坏或过长时出现。 - **LLM 行为漂移监控**：企业级 LLM 上线后，同一 prompt 周一和周五输出可能不同。VentureBeat 提出\"AI Evaluation Stack\"两层方案：Layer 1 确定性断言（正则/结构校验）+ Layer 2 模型评判（LLM-as-Judge），离线 golden dataset + 在线遥测结合。 - **VAKRA Agent Benchmark**：IBM Research 发布，评估 Agent 在真实任务中的推理、工具使用和失败模式。 ### 企业/生态",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:00:35.418Z",
+      "lastRecalledAt": "2026-05-27T12:00:35.418Z",
+      "queryHashes": [
+        "beb2c400aa1c"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "2026-04-26-report.md",
+        "deepseek-v4",
+        "正则/结构校验",
+        "llm-as-judge",
+        "企业/生态",
+        "report.md",
+        "产品",
+        "发布"
+      ]
+    },
+    "memory:memory/2026-04-26-report.md:1:17": {
+      "key": "memory:memory/2026-04-26-report.md:1:17",
+      "path": "memory/2026-04-26-report.md",
+      "startLine": 1,
+      "endLine": 17,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-04-26（晚间） ## ⚠️ 说明 飞书多维表格 URL 仍未在记忆中存储，本次 **4 表 × 10 条 = 40 条数据以草稿形式呈现**。待老大提供 URL 后可立即录入。 --- ## 📰 今日 AI/产品/技术/社区动态（2026-04-26） ### 大厂动态 - **OpenAI 发布 Workspace Agents**：面向企业的 Agent 产品，定位为 Custom GPTs 的企业继承者。可连接 Slack、Salesforce、Google Drive、Notion 等主流办公应用，基于 Codex 云端执行引擎，支持持久化记忆、定时调度、跨应用协作。5 月 6 日起开始按用量收费。 - **Salesforce Agentforce Vibes 2.0**：针对 Agent 核心失效模式——Context Overload（上下文膨胀）。通过 Abilities + Skills 机制让企业精确控制 Agent 行为范围，防止过多上下文污染 Agent 决策。第三方框架（如 ReAct）也在支持范围内。 - **Google Gemini 支持 Air-gapped 独立服务器部署**：完全离线运行，物理断开网络也能用，企业数据安全场景再添一员。 ### 产品发布 - **DeepSeek-V4 发布**：百万 token 上下文窗口（Hugging Face 博客 4 月 24 日），主打 Agent 可用上下文长度质的飞跃。 - **Nvidia + Gemma 4 VLA Demo**：在 Jetson",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:00:35.418Z",
+      "lastRecalledAt": "2026-05-27T12:00:35.418Z",
+      "queryHashes": [
+        "beb2c400aa1c"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "网络",
+        "2026-04-26-report.md",
+        "ai/产品/技术/社区动态",
+        "2.0",
+        "air-gapped",
+        "deepseek-v4"
+      ]
+    },
+    "memory:memory/2026-04-30-evening-report.md:19:45": {
+      "key": "memory:memory/2026-04-30-evening-report.md:19:45",
+      "path": "memory/2026-04-30-evening-report.md",
+      "startLine": 19,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "- **Meta AI 投入再加 $100 亿**：Zuckerberg 计划今年 AI 支出比原计划多 100 亿美元 ### 产品发布 - **Google Gemini 新增文件生成**：Gemini 现在可以直接生成并下载 .pdf/.docx/.xlsx/.csv/LaTeX/RTF/Markdown 文件，无需第三方工具，支持 Google Workspace 全套 - **OpenAI DevDay 2026 定档**：9 月 29 日，去年大会上 ChatGPT 内推出了\"应用\"功能 - **Apple Visual Intelligence 或随 iOS 27 迁入相机 App** ### 技术突破 - **arXiv 今日 cs.AI 新增 115 篇**，重点论文见下方 - **OpenAI GPT-5.5-Cyber** 首批向\"可信实体\"发布 - **Netomi 融资 $1.1 亿**：Accenture + Adobe 押注企业 AI 客服赛道；分析指出，能在真实企业环境（有治理要求、复杂流程）中证明有效的 AI 公司正在形成新的分界线 ### 企业/生态 - **Gen Z 对 AI 态度创新低**：VentureBeat 报道，年轻人对 AI 的恐惧与社交污名化并存，态度指数持续下滑 - **苹果智能助手 Unitree G1 机器人评测**：Joanna Stern 从《华尔街日报》独立后的首个视频，评测 Unitree G1 机器人在纽约的商业落地 --- ## 📚 本周 arXiv 重点论文（本周 cs.AI 共 ~11",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:00:35.418Z",
+      "lastRecalledAt": "2026-05-27T12:00:35.418Z",
+      "queryHashes": [
+        "beb2c400aa1c"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "2026-04-30-evening-report.md",
+        "csv/latex/rtf/markdown",
+        "cs.ai",
+        "gpt-5.5-cyber",
+        "1.1",
+        "企业/生态"
+      ]
+    },
+    "memory:memory/2026-04-30-evening-report.md:130:142": {
+      "key": "memory:memory/2026-04-30-evening-report.md:130:142",
+      "path": "memory/2026-04-30-evening-report.md",
+      "startLine": 130,
+      "endLine": 142,
+      "source": "memory",
+      "snippet": "2. Google 继续为美军提供 AI — Alphabet 总裁 Kent Walker 为五角大楼合同辩护 — The Verge — 2026-04-30 3. Meta AI 投入再加 $100 亿 — Zuckerberg 今年 AI 预算超预期 $100 亿 — The Verge — 2026-04-30 4. Google Gemini 新增文件生成 — 直接生成 .pdf/.docx/.xlsx/.csv 等，支持 Workspace 全套 — The Verge — 2026-04-29 5. OpenAI DevDay 2026 定档 9 月 29 日 — 去年推出 ChatGPT 内\"应用\"功能 — The Verge — 2026-04-29 6. GPT-5.5-Cyber 首批向可信实体发布 — Anthropic 加速产品化 — The Verge — 2026-04-30 7. Apple Visual Intelligence 或随 iOS 27 迁入相机 App — 泄露代码显示入口迁移 — The Verge — 2026-04-29 8. Netomi 融资 $1.1 亿 — Accenture + Adobe 押注企业 AI 客服，真实环境有效性成新分界线 — VentureBeat — 2026-04-30 9. Gen Z 对 AI 态度创新低 — 恐惧失业 + 社交污名并存，态度指数持续下滑 — The Verge — 2026-04-29 10. Joanna Stern 独立首测 Unitree G1 机器人 — 纽约商业",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:00:35.418Z",
+      "lastRecalledAt": "2026-05-27T12:00:35.418Z",
+      "queryHashes": [
+        "beb2c400aa1c"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "gpt",
+        "openai",
+        "2026-04-30-evening-report.md",
+        "gpt-5.5-cyber",
+        "1.1",
+        "evening",
+        "report.md",
+        "google"
+      ]
+    },
+    "memory:memory/2026-04-22-report.md:14:23": {
+      "key": "memory:memory/2026-04-22-report.md:14:23",
+      "path": "memory/2026-04-22-report.md",
+      "startLine": 14,
+      "endLine": 23,
+      "source": "memory",
+      "snippet": "### 技术突破 - **SafetyALFRED**：评估 MLLM 在物理环境中的主动安全规避能力。核心发现：模型在 QA 设定下能识别危险，但在 embodied 场景中主动缓解率很低——\"识别危险\"和\"主动行动规避\"之间存在显著差距。 - **MAGEO（Multi-Agent GEO）**：将生成引擎优化从单次任务变成策略学习问题。多 Agent 协作（规划/编辑/评估），将有效编辑模式蒸馏为可复用技能。发布 MSME-GEO-Bench 多场景 benchmark。 - **TSAG（Time Series Augmented Generation）**：金融场景 LLM Agent 评估框架，100 个金融问题，测试工具选择准确性、忠实度和幻觉率。GPT-4o、Llama 3、Qwen2 近满分工具使用准确率。 - **DT2IT-MRM**：多模态 Reward Modeling 新 SOTA，整合去偏偏好构建 + T2I 偏好数据重表述 + 迭代训练。在 VL-RewardBench 等三个主要 benchmark 刷新记录。 ### 企业/生态 - **72% 企业 AI 治理名不副实**：VentureBeat 调研 40 家企业，多数拥有 2+ 所谓\"主要\"AI 平台，实际安全控制远未到位。AI 平台碎片化蔓延，攻击面持续扩大。",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-27T12:00:35.418Z",
+      "lastRecalledAt": "2026-05-27T12:00:35.418Z",
+      "queryHashes": [
+        "beb2c400aa1c"
+      ],
+      "recallDays": [
+        "2026-05-27"
+      ],
+      "conceptTags": [
+        "gpt",
+        "2026-04-22-report.md",
+        "multi-agent",
+        "规划/编辑/评估",
+        "msme-geo-bench",
+        "gpt-4o",
+        "dt2it-mrm",
+        "vl-rewardbench"
+      ]
+    },
+    "memory:memory/2026-05-27-evening-report.md:1:38": {
+      "key": "memory:memory/2026-05-27-evening-report.md:1:38",
+      "path": "memory/2026-05-27-evening-report.md",
+      "startLine": 1,
+      "endLine": 38,
+      "source": "memory",
+      "snippet": "# 每日汇报 — 2026-05-27（晚间） **执行时间**：2026-05-27 20:00 PM (Asia/Shanghai) **数据来源**：aihot.virxact.com 精选 + arXiv cs.AI/cs.CL 本周新增（5/21-5/27） --- ## ⚠️ 飞书多维表格状态（连续第 30+ 天） 飞书 Bitable URL 仍未存储在任一可访问位置，导致 4 表 × 10 条 = 40 条数据仍无法自动录入。 **根本原因**：`xiaoai-ai-site/src/lib/feishu.ts` 从未创建，前端数据层断接。 **已尝试的所有路径**： - `xiaoai-ai-site/src/lib/` → 不存在 - workspace 内所有配置 → 无 `/base/` URL - 环境变量 / credentials → 无 Bitable 配置 - 飞书插件 `feishu_bitable_get_meta` → 400 Bad Request（5/27） **需要的操作**：老大只需发来任意一个飞书多维表格的 URL（格式 `https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），即可解锁自动录入。 --- ## 一、今日 AI/产品/技术/社区动态（5/26-5/27） > 时间窗：2026-05-26 12:00 UTC ~ 2026-05-27 12:00 UTC（过去 24 小时） --- ### 🔥 本日最重磅 **① Qwen3.7-Max 成为全球第二",
+      "recallCount": 3,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 3,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-28T12:03:28.323Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "9c19becf85a8",
+        "7fcb1dbb67ab",
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-28",
+        "2026-05-30",
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-05-27-evening-report.md",
+        "asia/shanghai",
+        "aihot.virxact.com",
+        "cs.ai/cs.cl",
+        "5/21-5/27",
+        "xiaoai-ai-site/src/lib/feishu.ts",
+        "xiaoai-ai-site/src/lib",
+        "feishu-bitable-get-meta"
+      ]
+    },
+    "memory:memory/2026-05-28-evening-report.md:121:152": {
+      "key": "memory:memory/2026-05-28-evening-report.md:121:152",
+      "path": "memory/2026-05-28-evening-report.md",
+      "startLine": 121,
+      "endLine": 152,
+      "source": "memory",
+      "snippet": "- **Krea 2 API**：支持 fal/ComfyUI/NousResearch Hermes，兼容 Claude/Codex/OpenClaw - **Google Pay 向\"智能体商务\"演进**：推出通用商务协议和 MCP 服务器 - **OpenAI 支持私有 MCP 服务器安全连接**：内部网络 MCP + 仅出站 HTTPS ### 行业动态 - **Cognition 估值 260 亿美元**，年化收入 4.92 亿美元，10 倍增长 - **英伟达展示台湾新园区**，计划每年在台投资 1500 亿美元 - **Replit 入选 Redpoint InfraRed 100 榜单** - **阿里云 DataWorks 推出 AI 数据智能体** - **MuleRun 登陆阿里云市场**：全天候 AI 劳动力，$20/月起 --- ## 二、飞书多维表格状态 ⚠️ **仍无法访问** — 飞书 Bitable URL 连续 31+ 天无法录入。 **需要的操作**：老大只需发来任意一个飞书多维表格的 URL（格式 `https://xxx.feishu.cn/base/xxxxx?table=xxxxx`），即可解锁自动录入。 --- ## 三、老大晚间论文解读（2篇） --- ### Paper 1（★★★★★）：Calibrated Collective Oversight — 弱监督者如何管住强 Agent **arXiv:2605.28807 | William Overman et al. | 2026-05-27**",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-29T12:03:35.358Z",
+      "lastRecalledAt": "2026-05-29T12:03:35.358Z",
+      "queryHashes": [
+        "a0fc4d107b82"
+      ],
+      "recallDays": [
+        "2026-05-29"
+      ],
+      "conceptTags": [
+        "openai",
+        "网络",
+        "2026-05-28-evening-report.md",
+        "fal/comfyui/nousresearch",
+        "claude/codex/openclaw",
+        "4.92",
+        "20/月起",
+        "xxx.feishu.cn/base/xxxxx"
+      ]
+    },
+    "memory:memory/2026-05-24-evening-report.md:42:59": {
+      "key": "memory:memory/2026-05-24-evening-report.md:42:59",
+      "path": "memory/2026-05-24-evening-report.md",
+      "startLine": 42,
+      "endLine": 59,
+      "source": "memory",
+      "snippet": "StepAudio 2.5 Realtime 是一款实时语音模型，能够深度理解用户语音中的语气、语速、停顿乃至微表情等副语言特征。支持通过 API 接入自定义人格，允许设定个性、背景故事和语言风格，提供上万种原生人格选项，可组合出数百万种特征。经过 RLHF 调优，在复杂角色扮演压力测试中保持角色一致性。支持中文和英文。 --- **③ Replit Agent × Squidler 全自动化 AI 质量保障闭环** 来源：Replit 官方 时间：5/23 19:00 Replit Agent 与 Squidler 已完成集成——用户通过自然语言描述应用功能，由 Replit Agent 构建 → Squidler 像真实用户一样自动化测试 → 发现问题自动反馈给 Replit Agent 修复。已正式加入 Replit MCP 库，从构建、测试到修复全自动化。 --- **④ 图灵测试 76 年后 AI 首次实证通过** 来源：加州大学圣地亚哥分校研究（IT之家） 时间：5/22 01:22",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-30T12:04:16.723Z",
+      "lastRecalledAt": "2026-05-30T12:04:28.942Z",
+      "queryHashes": [
+        "a2b5cf52c487",
+        "2ce6d3c80b90"
+      ],
+      "recallDays": [
+        "2026-05-30"
+      ],
+      "conceptTags": [
+        "2026-05-24-evening-report.md",
+        "2.5",
+        "5/23",
+        "5/22",
+        "evening",
+        "report.md",
+        "stepaudio",
+        "realtime"
+      ]
+    },
+    "memory:memory/2026-05-24-evening-report.md:51:76": {
+      "key": "memory:memory/2026-05-24-evening-report.md:51:76",
+      "path": "memory/2026-05-24-evening-report.md",
+      "startLine": 51,
+      "endLine": 76,
+      "source": "memory",
+      "snippet": "Replit Agent 与 Squidler 已完成集成——用户通过自然语言描述应用功能，由 Replit Agent 构建 → Squidler 像真实用户一样自动化测试 → 发现问题自动反馈给 Replit Agent 修复。已正式加入 Replit MCP 库，从构建、测试到修复全自动化。 --- **④ 图灵测试 76 年后 AI 首次实证通过** 来源：加州大学圣地亚哥分校研究（IT之家） 时间：5/22 01:22 研究首次实证现代 AI 可通过图灵测试。获得特定提示后，GPT-4.5 在 5-15 分钟对话中被误认为人类的概率高达 73%，显著超越真人。LLaMa-3.1-405B 判定率（56%）与真人相当，GPT-4o 和 ELIZA 仅约 20%。研究指出提示词至关重要——它使 AI 能模仿人类语气、幽默感甚至易错性等社会行为特征。 → **老大值得关注的信号**：这意味着在群聊等非正式对话场景中，AI 已经可以冒充人类。这对学习 Agent 意味着什么——它能否扮演\"学长学姐\"角色来增强学习体验？ --- **⑤ OpenClaw 2026.5.22 发布** 来源：X：OpenClaw 官方 时间：今天凌晨 04:00 Gateway/模型启动路径更精简，/models 响应时间降至约 5 毫秒，npm 包现提供锁定依赖项，Windows 安装/更新路径更安全。 --- ## 二、飞书多维表格状态",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 2,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-30T12:04:16.723Z",
+      "lastRecalledAt": "2026-05-30T12:04:28.942Z",
+      "queryHashes": [
+        "a2b5cf52c487",
+        "2ce6d3c80b90"
+      ],
+      "recallDays": [
+        "2026-05-30"
+      ],
+      "conceptTags": [
+        "gateway",
+        "gpt",
+        "2026-05-24-evening-report.md",
+        "5/22",
+        "gpt-4.5",
+        "5-15",
+        "llama-3.1-405b",
+        "gpt-4o"
+      ]
+    },
+    "memory:memory/2026-05-10-evening-report.md:171:184": {
+      "key": "memory:memory/2026-05-10-evening-report.md:171:184",
+      "path": "memory/2026-05-10-evening-report.md",
+      "startLine": 171,
+      "endLine": 184,
+      "source": "memory",
+      "snippet": "**次选**：Mise en Place for Agentic Coding（2605.05400）——如果今天你想聊\"怎么用 AI 工具更有效\"，这篇是方法论层面的答案。SLYP 是技术深水区，这篇是方法论入口。 --- ## 五、Bitable URL 提醒 **飞书多维表格 URL 仍未提供，连续第 18+ 天**。老大只需提供一个表格的 URL（任意子表），格式： `https://xxx.feishu.cn/base/xxxxx?table=xxxxx` 我来解析 app_token 和 table_id，然后一次性录入所有 4 表 × 10 条数据。 --- *晚间汇报完成时间：2026-05-10 20:00* *明日晨间汇报预计：2026-05-11 10:00*",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-31T12:03:11.598Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-05-10-evening-report.md",
+        "2605.05400",
+        "xxx.feishu.cn/base/xxxxx",
+        "app-token",
+        "table-id",
+        "evening",
+        "report.md",
+        "mise"
+      ]
+    },
+    "memory:memory/2026-05-12-evening-report.md:134:153": {
+      "key": "memory:memory/2026-05-12-evening-report.md:134:153",
+      "path": "memory/2026-05-12-evening-report.md",
+      "startLine": 134,
+      "endLine": 153,
+      "source": "memory",
+      "snippet": "| 2605.10834 | Pentesting Agents 真实世界评估 | 5/12 | ★★ | | 2605.08070 | VecCISC：自洽投票语义去重（ACL 2026 Findings） | 5/8 | ★★★ | | 2605.08061 | Rubric-Grounded RL：结构化多标准奖励 | 5/8 | ★★★ | --- ## 五、飞书多维表格状态 ⚠️ **无法录入** — 连续第 21+ 天缺少 Bitable URL。 老大只需提供任意一个表格的 URL，格式： ``` https://xxx.feishu.cn/base/xxxxx?table=xxxxx ``` 提供后我可以立即录入今日 4 表 × 10 条 + 本周所有 arXiv 论文数据。 --- *汇报生成时间：2026-05-12 20:00（UTC+8）* *下次任务：2026-05-13 10:00 自动执行*",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 1,
+      "maxScore": 1,
+      "firstRecalledAt": "2026-05-31T12:03:11.598Z",
+      "lastRecalledAt": "2026-05-31T12:03:11.598Z",
+      "queryHashes": [
+        "b0ac66eb3d27"
+      ],
+      "recallDays": [
+        "2026-05-31"
+      ],
+      "conceptTags": [
+        "2026-05-12-evening-report.md",
+        "2605.10834",
+        "5/12",
+        "2605.08070",
+        "5/8",
+        "2605.08061",
+        "rubric-grounded",
+        "xxx.feishu.cn/base/xxxxx"
+      ]
+    }
+  }
+}
