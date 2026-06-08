@@ -1,0 +1,470 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const curriculum = [
+  {
+    week: 'Week 1',
+    title: 'Python数据处理基础',
+    theme: '🏃 入门期：边做边学',
+    days: [
+      { day: 1, date: '2026-05-12', title: '变量、数据类型、列表与字典', status: 'completed' },
+      { day: 2, date: '2026-05-13', title: 'NumPy向量化思维', status: 'completed' },
+      { day: 3, date: '2026-05-14', title: 'NumPy进阶 + 小练习', status: 'completed' },
+      { day: 4, date: '2026-05-15', title: 'Pandas数据读取与探索', status: 'completed' },
+      { day: 5, date: '2026-05-16', title: 'Pandas数据清洗', status: 'completed' },
+      { day: 6, date: '2026-05-17', title: 'Pandas分组与聚合 + 可视化入门', status: 'completed' },
+      { day: 7, date: '2026-05-18', title: '统计学核心回顾 + Week 1小测', status: 'completed' },
+    ]
+  },
+  {
+    week: 'Week 2',
+    title: '机器学习核心概念',
+    theme: '🤖 进阶：理解算法思想',
+    days: [
+      { day: 8, date: '2026-05-19', title: '机器学习全景图', status: 'current' },
+      { day: 9, date: '2026-05-20', title: '线性回归', status: 'completed' },
+      { day: 10, date: '2026-05-21', title: '逻辑回归与分类', status: 'completed' },
+      { day: 11, date: '2026-05-22', title: '决策树与随机森林', status: 'completed' },
+      { day: 12, date: '2026-05-23', title: '无监督学习', status: 'completed' },
+      { day: 13, date: '2026-05-24', title: '模型评估与调优', status: 'completed' },
+      { day: 14, date: '2026-05-25', title: '正则化与特征工程 + Week 2小测', status: 'completed' },
+    ]
+  },
+  {
+    week: 'Week 3',
+    title: '深度学习理论',
+    theme: '🧠 核心：弄懂原理',
+    days: [
+      { day: 15, date: '2026-05-26', title: '神经网络基础', status: 'completed' },
+      { day: 16, date: '2026-05-27', title: '激活函数与损失函数', status: 'completed' },
+      { day: 17, date: '2026-05-28', title: '反向传播（BP）原理', status: 'completed' },
+      { day: 18, date: '2026-05-29', title: '优化器与学习率', status: 'completed' },
+      { day: 19, date: '2026-05-30', title: 'CNN（卷积神经网络）', status: 'completed' },
+      { day: 20, date: '2026-05-31', title: 'RNN/LSTM（序列模型）', status: 'completed' },
+      { day: 21, date: '2026-06-01', title: 'Attention机制 + Week 3小测', status: 'completed' },
+    ]
+  },
+  {
+    week: 'Week 4',
+    title: 'PyTorch框架入门',
+    theme: '⚡ 实战：用代码说话',
+    days: [
+      { day: 22, date: '2026-06-02', title: 'PyTorch张量', status: 'completed' },
+      { day: 23, date: '2026-06-03', title: '自动微分（Autograd）', status: 'completed' },
+      { day: 24, date: '2026-06-04', title: '数据集与数据加载', status: 'completed' },
+      { day: 25, date: '2026-06-05', title: '模型定义与训练循环', status: 'completed' },
+      { day: 26, date: '2026-06-06', title: '迁移学习与Fine-tuning', status: 'completed' },
+      { day: 27, date: '2026-06-07', title: 'Hugging Face Transformers入门', status: 'completed' },
+      { day: 28, date: '2026-06-08', title: '综合实战 + Week 4小测', status: 'completed' },
+    ]
+  },
+  {
+    week: 'Week 5',
+    title: '查漏补缺',
+    theme: '🎯 冲刺：薄弱环节强化',
+    days: [
+      { day: 29, date: '2026-06-09', title: '薄弱环节强化', status: 'completed' },
+      { day: 30, date: '2026-06-10', title: '30天总结 + 后续规划', status: 'completed' },
+    ]
+  }
+];
+
+const todayContent = {
+  day: 2,
+  date: '2026-05-13',
+  topic: 'NumPy向量化思维',
+  resources: [
+    {
+      type: '📖 教材',
+      title: 'Dive into Deep Learning — Chapter 2.1 数据操作',
+      desc: 'NumPy张量基础：创建、形状、索引、运算。结合2.2线性代数（矩阵运算）。',
+      url: 'https://d2l.ai/chapter_preliminaries/index.html'
+    },
+    {
+      type: '🎥 视频',
+      title: '3Blue1Brown — 线性代数的本质（1-4集）',
+      desc: '从几何角度理解向量、矩阵、点积——补足数学直觉。',
+      url: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab'
+    }
+  ],
+  discussion: 'NumPy的广播机制和PyTorch有什么异同？为什么要避免用Python循环处理大规模数据？',
+  quiz: [
+    {
+      q: '如何创建一个 3×3 的单位矩阵（identity matrix）？',
+      options: ['np.identity(3)', 'np.eye(3)', 'np.ones((3,3))', 'np.zeros((3,3))'],
+      answer: 1,
+      explanation: 'np.eye(N) 创建 N×N 单位矩阵，对角线为1。np.identity(N) 也可以，效果相同。'
+    },
+    {
+      q: 'NumPy 的广播（broadcasting）是什么？',
+      options: [
+        '将数组复制到多个GPU上并行计算',
+        '在不同形状的数组之间进行逐元素运算',
+        '自动将Python代码编译成C语言加速',
+        '将多个小数组拼接成一个大数组'
+      ],
+      answer: 1,
+      explanation: '广播允许形状不同的数组进行逐元素运算，如 1×n 行向量 + n×1 列向量 → n×n 矩阵。'
+    },
+    {
+      q: '给一个 4×4 数组，如何提取右下角 2×2 子矩阵？',
+      options: ['arr[2:, 2:]', 'arr[2:4, 2:4]', 'arr[-2:, -2:]', '以上都可以'],
+      answer: 3,
+      explanation: 'arr[2:4, 2:4]、arr[2:, 2:]、arr[-2:, -2:] 三种写法都能提取右下角 2×2，结果相同。'
+    }
+  ]
+};
+---
+
+<Layout title="学习中心 — 小艾AI站 🐱">
+  <div class="flex min-h-screen">
+    <!-- 左侧边栏 -->
+    <aside class="w-80 border-r border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl fixed left-0 top-16 bottom-0 overflow-y-auto sidebar-hide-on-mobile">
+      <div class="p-6">
+        <!-- 顶部标题 -->
+        <div class="mb-8">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-2xl">📚</span>
+            <h2 class="text-lg font-bold text-zinc-100">AI 学习路径</h2>
+          </div>
+          <p class="text-xs text-zinc-500 ml-7">6个月 · 入门到能读懂框架代码</p>
+        </div>
+
+        <!-- 课程列表 -->
+        <nav class="space-y-6">
+          {curriculum.map((week, wi) => (
+            <div class="week-section" data-week={wi}>
+              <div class="flex items-center gap-2 mb-3">
+                <span class="text-xs font-bold text-amber-400/80 bg-amber-400/10 px-2 py-0.5 rounded">{week.week}</span>
+                <span class="text-xs text-zinc-600">{week.theme}</span>
+              </div>
+              <h3 class="text-sm font-semibold text-zinc-300 mb-2">{week.title}</h3>
+              <ul class="space-y-1">
+                {week.days.map((dayItem) => (
+                  <li>
+                    <button
+                      class="day-btn w-full text-left px-3 py-2 rounded-lg text-sm transition-all duration-200 flex items-center gap-2"
+                      data-day={dayItem.day}
+                      data-status={dayItem.status}
+                    >
+                      <span class="day-indicator w-5 h-5 rounded-full flex items-center justify-center text-xs flex-shrink-0">
+                        {dayItem.status === 'completed' ? '✓' : dayItem.day}
+                      </span>
+                      <span class="day-title truncate">{dayItem.title}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <!-- 底部统计 -->
+        <div class="mt-8 p-4 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/5 border border-amber-500/20">
+          <div class="text-xs text-amber-400/80 mb-2 font-semibold">📊 学习进度</div>
+          <div class="text-2xl font-black text-amber-400">1/30</div>
+          <div class="text-xs text-zinc-500 mt-1">Day 2 · Week 1 进行中</div>
+          <div class="mt-3 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full" style="width: 3.3%"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="flex-1 ml-80">
+      <!-- 顶部进度条 -->
+      <div class="sticky top-16 z-40 bg-zinc-950/90 backdrop-blur-xl border-b border-zinc-800/50 px-8 py-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="text-sm font-semibold text-amber-400">Day 2</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-sm text-zinc-400">2026-05-13</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-sm text-zinc-400">Week 1</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-zinc-500">
+            <span>今日主题：</span>
+            <span class="text-amber-400 font-semibold">NumPy向量化思维</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 内容区 -->
+      <div class="max-w-4xl mx-auto px-8 py-10">
+        <!-- 每日内容卡片 -->
+        <div class="space-y-8">
+          
+          <!-- 主题区 -->
+          <div class="relative p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 via-zinc-900/80 to-zinc-900/80 border border-amber-500/20 overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-[80px] pointer-events-none"></div>
+            <div class="relative">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold">Day 2</span>
+                <span class="text-zinc-500 text-xs">Python数据处理基础</span>
+              </div>
+              <h1 class="text-3xl md:text-4xl font-black mb-3">
+                <span class="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">NumPy向量化思维</span>
+              </h1>
+              <p class="text-zinc-400 text-lg leading-relaxed max-w-2xl">
+                从"用循环思考"到"用向量思考"——这是数据科学思维的第一步。
+                忘掉 Python for 循环，用矩阵思维重新理解数据操作。
+              </p>
+            </div>
+          </div>
+
+          <!-- 学习资料 -->
+          <div class="p-6 rounded-2xl border border-zinc-800/50 bg-zinc-900/30">
+            <h2 class="text-xl font-bold mb-5 flex items-center gap-2">
+              <span>📖</span> 今日学习资料
+            </h2>
+            <div class="space-y-4">
+              {todayContent.resources.map((res) => (
+                <a href={res.url} target="_blank" rel="noopener" 
+                   class="group block p-5 rounded-xl bg-zinc-800/30 border border-zinc-700/50 hover:border-amber-500/30 hover:bg-zinc-800/50 transition-all">
+                  <div class="flex items-start gap-4">
+                    <span class="text-2xl flex-shrink-0">{res.type === '📖 教材' ? '📖' : '🎥'}</span>
+                    <div class="flex-1 min-w-0">
+                      <div class="font-semibold text-zinc-100 group-hover:text-amber-400 transition-colors mb-1">{res.title}</div>
+                      <div class="text-sm text-zinc-500 leading-relaxed">{res.desc}</div>
+                      <div class="mt-2 text-xs text-amber-400/60 flex items-center gap-1 group-hover:text-amber-400">
+                        <span>打开链接</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- 讨论区 -->
+          <div class="p-6 rounded-2xl border border-zinc-800/50 bg-zinc-900/30">
+            <h2 class="text-xl font-bold mb-5 flex items-center gap-2">
+              <span>💬</span> 今日思考
+            </h2>
+            <div class="p-5 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/5 border border-purple-500/20">
+              <p class="text-zinc-300 leading-relaxed italic">"{todayContent.discussion}"</p>
+            </div>
+            <div class="mt-4 p-4 rounded-lg bg-zinc-800/30 text-sm text-zinc-500">
+              💡 <strong class="text-zinc-400">学习提示：</strong> 
+              带着这些问题去看资料：广播时数组是怎么"扩展"的？PyTorch的张量操作是否完全兼容NumPy语法？
+            </div>
+          </div>
+
+          <!-- 打卡区 -->
+          <div class="p-6 rounded-2xl border border-zinc-800/50 bg-zinc-900/30">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-xl font-bold flex items-center gap-2">
+                <span>✅</span> 今日自测
+              </h2>
+              <span class="text-xs text-zinc-500 px-3 py-1 rounded-full bg-zinc-800">共 {todayContent.quiz.length} 题</span>
+            </div>
+
+            <div id="quiz-container" class="space-y-6">
+              {todayContent.quiz.map((q, qi) => (
+                <div class="quiz-item" data-index={qi}>
+                  <div class="question-header flex items-start gap-3 mb-3">
+                    <span class="quiz-num w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{qi + 1}</span>
+                    <p class="text-zinc-200 font-medium leading-relaxed">{q.q}</p>
+                  </div>
+                  <div class="options grid gap-2 ml-9">
+                    {q.options.map((opt, oi) => (
+                      <button 
+                        class="option-btn text-left px-4 py-3 rounded-lg border border-zinc-700/50 bg-zinc-800/30 text-zinc-400 text-sm hover:border-amber-500/30 hover:text-zinc-200 transition-all"
+                        data-q={qi}
+                        data-o={oi}
+                      >
+                        <span class="opacity-50 mr-2">{String.fromCharCode(65 + oi)}.</span>
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                  <div class="result mt-3 ml-9 hidden"></div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-6 flex items-center justify-between">
+              <div id="quiz-progress" class="text-sm text-zinc-500">
+                <span class="text-amber-400 font-semibold">0</span> / {todayContent.quiz.length} 已回答
+              </div>
+              <button 
+                id="check-btn"
+                class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 text-zinc-950 font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled
+              >
+                检查答案
+              </button>
+            </div>
+
+            <div id="quiz-result" class="mt-6 hidden p-5 rounded-xl border"></div>
+          </div>
+
+          <!-- 导航 -->
+          <div class="flex items-center justify-between pt-4 border-t border-zinc-800/30">
+            <a href="/learning/day1" class="flex items-center gap-2 px-4 py-2 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50 transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              <span>Day 1</span>
+            </a>
+            <a href="/learning/day3" class="flex items-center gap-2 px-4 py-2 rounded-lg text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50 transition-all">
+              <span>Day 3</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 移动端边栏切换按钮 -->
+  <button id="sidebar-toggle" class="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/30 flex items-center justify-center text-xl z-50 md:hidden sidebar-toggle-btn">
+    📚
+  </button>
+</Layout>
+
+<style>
+  /* 侧边栏样式 */
+  .day-btn[data-status="completed"] .day-indicator {
+    background: linear-gradient(135deg, #24e08a, #00b894);
+    color: #0a0a0f;
+  }
+  .day-btn[data-status="current"] .day-indicator {
+    background: linear-gradient(135deg, #f59e0b, #e67e22);
+    color: #0a0a0f;
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+  }
+  .day-btn[data-status="pending"] .day-indicator {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.3);
+  }
+  .day-btn[data-status="completed"] { opacity: 0.6; }
+  .day-btn[data-status="completed"] .day-title { text-decoration: line-through; }
+  .day-btn[data-status="current"] {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+  .day-btn[data-status="current"] .day-title { color: #f59e0b; }
+  
+  /* 选项卡片 */
+  .option-btn.selected {
+    border-color: #f59e0b;
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+  }
+  .option-btn.correct {
+    border-color: #24e08a;
+    background: rgba(36, 224, 138, 0.1);
+    color: #24e08a;
+  }
+  .option-btn.wrong {
+    border-color: #ff5c5c;
+    background: rgba(255, 92, 92, 0.1);
+    color: #ff5c5c;
+  }
+
+  /* 移动端适配 */
+  @media (max-width: 768px) {
+    .sidebar-hide-on-mobile {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar-hide-on-mobile.open {
+      transform: translateX(0);
+    }
+    main.ml-80 {
+      margin-left: 0 !important;
+    }
+    .sidebar-toggle-btn {
+      display: flex !important;
+    }
+  }
+</style>
+
+<script>
+  // ====== Quiz 逻辑 ======
+  const answers = {0: 1, 1: 1, 2: 3};
+  const explanations = [
+    'np.eye(N) 创建 N×N 单位矩阵，对角线为1。np.identity(N) 也可以，效果相同。',
+    '广播允许形状不同的数组进行逐元素运算，如 1×n 行向量 + n×1 列向量 → n×n 矩阵。',
+    'arr[2:4, 2:4]、arr[2:, 2:]、arr[-2:, -2:] 三种写法都能提取右下角 2×2，结果相同。'
+  ];
+  const userAnswers: Record<number, number> = {};
+  let answeredCount = 0;
+
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = parseInt(btn.getAttribute('data-q') || '0');
+      const o = parseInt(btn.getAttribute('data-o') || '0');
+      
+      // 清除同一题的其他选项
+      document.querySelectorAll(`.option-btn[data-q="${q}"]`).forEach(b => {
+        b.classList.remove('selected');
+      });
+      btn.classList.add('selected');
+      userAnswers[q] = o;
+      
+      if (!(q in userAnswers) || userAnswers[q] === undefined) {
+        answeredCount++;
+      }
+      updateProgress();
+    });
+  });
+
+  function updateProgress() {
+    const progressEl = document.getElementById('quiz-progress');
+    if (progressEl) {
+      progressEl.innerHTML = `<span class="text-amber-400 font-semibold">${answeredCount}</span> / ${3} 已回答`;
+    }
+    const checkBtn = document.getElementById('check-btn') as HTMLButtonElement;
+    if (checkBtn) {
+      checkBtn.disabled = answeredCount < 3;
+    }
+  }
+
+  document.getElementById('check-btn')?.addEventListener('click', () => {
+    let correct = 0;
+    for (const [q, o] of Object.entries(userAnswers)) {
+      const qi = parseInt(q);
+      const options = document.querySelectorAll(`.option-btn[data-q="${qi}"]`);
+      options.forEach(opt => {
+        const oi = parseInt(opt.getAttribute('data-o') || '0');
+        if (oi === answers[qi]) opt.classList.add('correct');
+        else if (oi === o) opt.classList.add('wrong');
+        opt.classList.remove('selected');
+      });
+      if (o === answers[qi]) correct++;
+    }
+    
+    const resultEl = document.getElementById('quiz-result');
+    if (resultEl) {
+      resultEl.classList.remove('hidden');
+      if (correct === 3) {
+        resultEl.className = 'mt-6 p-5 rounded-xl border bg-gradient-to-r from-green-500/10 to-emerald-500/5 border-green-500/30';
+        resultEl.innerHTML = `<div class="text-green-400 font-bold text-lg mb-1">🎉 全对！今日学习完成</div>
+          <div class="text-zinc-400 text-sm mt-2">继续 Day 3 →</div>`;
+      } else {
+        resultEl.className = 'mt-6 p-5 rounded-xl border bg-gradient-to-r from-amber-500/10 to-orange-500/5 border-amber-500/30';
+        resultEl.innerHTML = `<div class="text-amber-400 font-bold mb-2">答对 ${correct}/3</div>
+          <div class="text-zinc-400 text-sm space-y-1">${explanations.map((e, i) => `<div>• ${e}</div>`).join('')}</div>`;
+      }
+    }
+    
+    const checkBtn = document.getElementById('check-btn') as HTMLButtonElement;
+    if (checkBtn) checkBtn.style.display = 'none';
+  });
+
+  // ====== 侧边栏切换（移动端） ======
+  const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebar = document.querySelector('.sidebar-hide-on-mobile');
+  
+  sidebarToggle?.addEventListener('click', () => {
+    sidebar?.classList.toggle('open');
+  });
+
+  // 点击内容区关闭侧边栏
+  document.querySelector('main')?.addEventListener('click', () => {
+    sidebar?.classList.remove('open');
+  });
+</script>
